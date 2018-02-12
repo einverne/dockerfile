@@ -1,0 +1,6 @@
+[submodule "docker-h5ai"]
+	path = docker-h5ai
+	url = https://github.com/einverne/docker-h5ai.git
+[submodule "docker-nginx-google"]
+	path = docker-nginx-google
+	url = https://github.com/einverne/docker-nginx-google.git
