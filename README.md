@@ -7,4 +7,10 @@
 ## docker-nginx-google
 使用 docker 一键反向代理Google
 
+## netdata
+netdata 监控VPS
 
+    cd netdata
+    docker build -t "netdata" .
+
+netdata 默认的端口在 19999
