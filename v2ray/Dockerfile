@@ -18,8 +18,8 @@ RUN apk upgrade --update \
         /etc/v2ray/ \
     && curl -L -H "Cache-Control: no-cache" -o /tmp/v2ray/v2ray.zip \
         https://github.com/v2ray/v2ray-core/releases/download/${V2RAY_VERSION}/v2ray-linux-64.zip \
-    && unzip /tmp/v2ray/v2ray.zip -d /usr/local/bin/v2ray/ \
-    && chmod +x /usr/local/bin/v2ray && chmod +x /usr/local/bin/v2ctl \
+    && unzip /tmp/v2ray/v2ray.zip -d /usr/bin/v2ray/ \
+    && chmod +x /usr/bin/v2ray/v2ray && chmod +x /usr/bin/v2ray/v2ctl \
     && apk del curl \
     && rm -rf /tmp/v2ray /var/cache/apk/*
 
