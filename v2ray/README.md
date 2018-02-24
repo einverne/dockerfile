@@ -20,3 +20,7 @@ docker run -dt --name v2ray -p 10800:10800 v2ray
 ```
 
 **Container 默认监听 10800 端口**
+
+## v2ray 官方
+
+官方的repo : <https://github.com/v2ray/install>
