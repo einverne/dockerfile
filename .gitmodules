@@ -7,3 +7,6 @@
 [submodule "netdata"]
 	path = netdata
 	url = https://github.com/firehol/netdata.git
+[submodule "docker-squid"]
+	path = docker-squid
+	url = https://github.com/einverne/docker-squid.git
