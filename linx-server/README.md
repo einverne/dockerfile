@@ -12,4 +12,5 @@ build 镜像
 
     docker run -p 8080:8080 -d -v /media/meta:/data/meta -v /media/files:/data/files linx-server
 
-
+## 选项
+如果想要修改 linx 的配置，当前目录下有 `config.ini` 文件，文件中可以指定网站的title，还有支持的最大文件大小，其他的配置可参考原项目地址
