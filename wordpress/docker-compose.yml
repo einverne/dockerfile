@@ -5,7 +5,7 @@ services:
     container_name: wordpress_db
     restart: always
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql_wordpress
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_DATABASE: wordpress
