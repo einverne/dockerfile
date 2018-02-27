@@ -3,22 +3,27 @@ version: '3'
 services:
   db:
     image: mysql
+    container_name: chevereto_db
     volumes:
-      - '/var/lib/mysql'
+      - '/var/lib/mysql_chevereto'
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: chevereto_root
       MYSQL_DATABASE: chevereto
       MYSQL_USER: chevereto
       MYSQL_PASSWORD: chevereto
+    networks:
+      - chevereto-network
 
   chevereto:
     depends_on:
       - db
-    image: nmtan/chevereto:latest
+    #image: nmtan/chevereto:latest
+    build: ./
+    container_name: chevereto
     restart: always
     environment:
-      CHEVERETO_DB_HOST: db
+      CHEVERETO_DB_HOST: db:3306
       CHEVERETO_DB_USERNAME: chevereto
       CHEVERETO_DB_PASSWORD: chevereto
       CHEVERETO_DB_NAME: chevereto
@@ -27,4 +32,8 @@ services:
       - '/var/www/html/chevereto/images:/var/www/html/images:rw'
     ports:
       - 8081:80
-
+    networks:
+      - chevereto-network
+networks:
+  chevereto-network:
+    driver: bridge
