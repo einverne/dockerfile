@@ -17,6 +17,7 @@
 
 ## 使用
 
+```
 docker run -it --name chevereto -d \
     --link mysql:mysql \
     -p 80:80 \
@@ -27,7 +28,7 @@ docker run -it --name chevereto -d \
     -e "CHEVERETO_DB_NAME=chevereto" \
     -e "CHEVERETO_DB_PREFIX=chv_" \
     einverne/chevereto
-
+```
 
 推荐使用 [Docker Compose](https://yeasy.gitbooks.io/docker_practice/content/compose/) ， `docker-compose.yml` 文件在当前目录下
 
