@@ -1,0 +1,10 @@
+version: "3"
+services:
+  frps:
+    build: ./
+    container_name: frps
+    restart: always
+    ports:
+      - "7000:7000"
+      - "6000:6000"
+      - "6001:6001"
