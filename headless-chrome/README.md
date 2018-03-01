@@ -1,8 +1,18 @@
-## headless chrome
 
-项目: <https://github.com/yukinying/chrome-headless-browser-docker>
+目录下包含两个镜像，chrome 下单纯包含 chrome，chromedriver 下在 chrome 基础上包含 Chromedriver。
 
-相关文章:
 
-- Google : <https://developers.google.com/web/updates/2017/04/headless-chrome>
-- Dockerfile文件：<https://github.com/ebidel/lighthouse-ci/blob/master/builder/Dockerfile>
+https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver
+
+
+
+
+
+
+
+
+
+
+https://intoli.com/blog/running-selenium-with-headless-chrome
+
+https://duo.com/blog/driving-headless-chrome-with-python
