@@ -26,7 +26,7 @@
 
 应用程序可以通过 <http://localhost:9222/json> 链接找到打开的页面，通过 JSON 数据来获知页面内容。
 
-这里使用 [pychrome](https://github.com/fate0/pychrome) 作为例子
+这里使用 [pychrome](https://github.com/fate0/pychrome) 作为例子，具体的代码可以参考 example 目录下[例子](example)。
 
 
 Google really needs to hire some of the Java guys to write up a Chrome Trail!, There's no low-level vs high-level, there's only good tutorial vs messy tutorial.
