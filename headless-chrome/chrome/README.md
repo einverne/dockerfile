@@ -1,15 +1,6 @@
 ## headless chrome
 Headless浏览器是一种很好的工具，用于自动化测试和不需要可视化用户界面的服务器。例如，你想在一个网页上运行一些测试，从网页创建一个PDF，或者只是检查浏览器怎样递交URL。
 
-
-Dockerfile 文件参考：
-
-- <fate0/headless-chrome>
-- <alpeware/chrome-headless-trunk>
-- <ebidel/lighthouse-ci>
-- <https://github.com/yukinying/chrome-headless-browser-docker>
-- <https://github.com/jessfraz/dockerfiles>
-
 ## 使用
 
     docker pull einverne/headless-chrome
@@ -34,3 +25,13 @@ Selenium 通过 protocol 和远程 chromedriver 通信，Selenium 实际上是�
 > Failed to move to new namespace: PID namespaces supported, Network namespace supported, but failed: errno = Operation not permitted
 
 在 Dockerfile 中启动 Chrome 时添加参数: `--no-sandbox` 
+
+
+Dockerfile 文件参考：
+
+- <fate0/headless-chrome>
+- <alpeware/chrome-headless-trunk>
+- <ebidel/lighthouse-ci>
+- <https://github.com/yukinying/chrome-headless-browser-docker>
+- <https://github.com/jessfraz/dockerfiles>
+

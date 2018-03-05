@@ -28,22 +28,5 @@
 
 这里使用 [pychrome](https://github.com/fate0/pychrome) 作为例子，具体的代码可以参考 example 目录下[例子](example)。
 
+更多的内容可以参考我的[博客](https://einverne.github.io/post/2018/03/chrome-devtools-protocal-using-python.html)
 
-Google really needs to hire some of the Java guys to write up a Chrome Trail!, There's no low-level vs high-level, there's only good tutorial vs messy tutorial.
-
-In any case, I bookmarked some creams in the mess for heritors' sake:
-
-https://stackoverflow.com/questions/28430479/using-google-chrome-remote-debugging-protocol
-https://blog.phantombuster.com/web-scraping-in-2017-headless-chrome-tips-tricks-4d6521d695e8
-https://minhcung.me/chrome-headless-a-whole-new-world-of-web-scraping/
-https://chromedevtools.github.io/devtools-protocol/
-https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md
-https://developers.google.com/web/updates/2017/04/headless-chrome
-https://stackoverflow.com/questions/7848878/how-to-use-google-chrome-remote-debugging-protocol-in-http
-https://github.com/auchenberg/devtools-remote
-https://github.com/auchenberg/chrome-devtools-app
-
-
-https://intoli.com/blog/running-selenium-with-headless-chrome
-
-https://duo.com/blog/driving-headless-chrome-with-python
