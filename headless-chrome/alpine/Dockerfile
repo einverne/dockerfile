@@ -14,7 +14,7 @@ ARG TZ="Asia/Shanghai"
 ENV TZ ${TZ}
 
 # https://pkgs.alpinelinux.org/package/edge/community/x86_64/chromium
-RUN apk add --no-cache bash \
+RUN apk update && apk add --no-cache bash \
     alsa-lib \
     at-spi2-atk \
     atk \
@@ -24,7 +24,6 @@ RUN apk add --no-cache bash \
     eudev-libs \
     expat \
     flac \
-    fontconfig \
     gdk-pixbuf \
     glib \
     libgcc \
@@ -36,8 +35,6 @@ RUN apk add --no-cache bash \
     libxdamage \
     libxext \
     libxfixes \
-    ttf-opensans \
-    ttf-freefont \
     tzdata \
     libexif \
     udev \
@@ -45,6 +42,7 @@ RUN apk add --no-cache bash \
     zlib-dev \
     chromium \
     chromium-chromedriver \
+    && apk add wqy-zenhei --update-cache --repository http://nl.alpinelinux.org/alpine/edge/testing --allow-untrusted \
     && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
     && rm -rf /var/cache/apk/* \
