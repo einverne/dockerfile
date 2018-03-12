@@ -10,3 +10,6 @@
 [submodule "docker-squid"]
 	path = docker-squid
 	url = https://github.com/einverne/docker-squid.git
+[submodule "qiandao"]
+	path = qiandao
+	url = https://github.com/einverne/qiandao.git
