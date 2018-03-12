@@ -5,7 +5,9 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 更加详细的配置及代码查看 [GitHub](https://github.com/fatedier/frp/blob/master/README_zh.md)
 
 ## 使用
-本镜像只提供服务端，服务端配置在 `frps.ini` 中。
+
+
+本镜像只提供服务端，Dockerfile 文件在 frps 目录下，服务端配置在 `frps.ini` 中。
 
     docker-compose up
 
