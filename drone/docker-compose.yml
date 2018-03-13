@@ -1,0 +1,43 @@
+version: '3'
+services:
+  drone-server:
+    container_name: drone-server
+    image: drone/drone:0.8
+    ports:
+      - 4000:8000
+      - 9000                # use this port to communication inside drone
+    volumes:
+      - drone-data:/var/lib/drone/:rw
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - DRONE_SECRET=${DRONE_SECRET} # Drone server and agents use a shared secret to authenticate communication, this should be a random string and keep private
+      - DRONE_OPEN=false
+      - DRONE_HOST=${DRONE_HOST}
+      - DRONE_ADMIN=${DRONE_ADMIN}
+      - DRONE_GITHUB=true
+      - DRONE_GITHUB_CLIENT=${DRONE_GITHUB_CLIENT}
+      - DRONE_GITHUB_SECRET=${DRONE_GITHUB_SECRET}
+      - DRONE_GITHUB_SKIP_VERIFY=true
+#      - DRONE_SERVER_CERT=/etc/certs/drone.domain.com.crt
+#      - DRONE_SERVER_KEY=/etc/certs/drone.domain.com.key
+
+  drone-agent:
+    container_name: drone-agent
+    image: drone/agent:0.8
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - drone-server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_SECRET=${DRONE_SECRET}
+      - DRONE_SERVER=drone-server:9000
+#    dns: 114.114.114.114
+
+volumes:
+  drone-data:
+
