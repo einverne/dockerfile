@@ -12,6 +12,7 @@ Gogs 是一个可以自己托管的Git服务，类似于GitHub，GitLab等等平
 
     docker-compose up -d
 
+设置中会挂载宿主机 `/var/gogs/mysql` 和 `/var/gogs/data` 两个目录。
 
 ## reference
 
