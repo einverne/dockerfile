@@ -2,7 +2,7 @@ version: '3.3'
 services: 
   gogsdb:
     image: mysql:5.7
-    container_name: gogs_db
+    container_name: gogsdb
     restart: always
     environment:
       MYSQL_DATABASE: gogs
@@ -20,16 +20,18 @@ services:
     depends_on:
       - gogsdb
     image: gogs/gogs
-    container_name: gogs
+    container_name: gogsapp
     restart: always
     ports:
-      - "10022:22"
-      - "13000:3000"
+      - "322:22"
+      - "3000:3000"
     volumes:
-      - /var/gogs/data:/data
+      - app_data:/data
     networks:
       - gogs-network
 volumes:
   db_data:
+  app_data:
 networks:
   gogs-network:
+    driver: bridge
