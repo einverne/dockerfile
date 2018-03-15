@@ -15,4 +15,4 @@
 	url = https://github.com/einverne/qiandao.git
 [submodule "weibo-rss"]
 	path = weibo-rss
-	url = git@github.com:einverne/weibo-rss.git
+	url = https://github.com/einverne/weibo-rss.git
