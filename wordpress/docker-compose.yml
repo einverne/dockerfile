@@ -20,14 +20,15 @@ services:
     restart: always
     depends_on:
       - db
-    ports:
-      - "8000:80"
+    expose:
+      - 80
     volumes:
       - /var/www/html/wp-content:/var/www/html/wp-content 
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress_user
       WORDPRESS_DB_PASSWORD: wordpress_pass
+      VIRTUAL_HOST: www.einverne.info
     networks:
       - wordpress-network
 volumes:
