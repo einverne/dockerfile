@@ -1,6 +1,6 @@
 FROM alpine:3.7
 
-LABEL maintainer="einverne <einverne@gmail.com>"
+LABEL maintainer="Ein Verne <einverne@gmail.com>"
 
 ARG TZ="Asia/Shanghai"
 

@@ -1,0 +1,6 @@
+privoxy:
+  restart: always
+  build: .
+#image: einverne/privoxy
+  ports:
+    - "8118:8118"
