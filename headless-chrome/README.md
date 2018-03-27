@@ -22,6 +22,7 @@
 启动容器
 
     docker run -it --rm --name alpine-chrome -p 9222:9222 einverne/alpine-chrome
+    docker run -d --name=headless-chrome -p 9222:9222 --restart=always einverne/headless-chrome:latest
 
 容器会监听 9222 端口，访问 <http://localhost:9222> ，会看到 Developer Tools interface 开启了一个内嵌的调试，一旦打开 Developer Tools 自动建立了 Web Socket 连接，并开始交换 JSON 数据。
 
