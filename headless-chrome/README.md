@@ -5,6 +5,7 @@
 - chrome 目录下基于 Debian 的 headless-chrome
 - chromedriver 下在 chrome 的基础上增加了 chromedriver
 - alpine 目录下为基于 Alpine:3.7 镜像的 headless Chromium
+- alpine-unstable 是基于 alpine:edge 的 headless Chromium
 
 使用 Docker 跑 Headless Chrome 的一大重要内容就是将 Chrome 作为 server 来跑爬虫，或者进行网页自动化过程。结合 Chrome 官方推出的 [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/)协议，或者使用 chromedriver + [SeleniumHQ](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver)。可以实现很多有意思的自动化过程。
 
