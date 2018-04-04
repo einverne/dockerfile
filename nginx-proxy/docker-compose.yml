@@ -18,7 +18,8 @@ services:
 
   letsencrypt-nginx-proxy-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt-nginx
+    restart: unless-stopped
     volumes:
       - "conf:/etc/nginx/conf.d"
       - "vhost:/etc/nginx/vhost.d"
