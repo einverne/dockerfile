@@ -9,9 +9,12 @@ services:
       - /var/www/linx/files:/data/files
     expose:
       - 80
+      - 443
     environment:
       VIRTUAL_HOST: linx.einverne.info
       VIRTUAL_PORT: 8080
+      LETSENCRYPT_HOST: linx.einverne.info
+      LETSENCRYPT_EMAIL: admin@einverne.info
 
 networks:
   default:
