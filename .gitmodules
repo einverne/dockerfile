@@ -16,3 +16,6 @@
 [submodule "weibo-rss"]
 	path = weibo-rss
 	url = https://github.com/einverne/weibo-rss.git
+[submodule "docker-yourls"]
+	path = docker-yourls
+	url = git@github.com:einverne/docker-yourls.git
