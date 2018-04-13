@@ -5,7 +5,7 @@ services:
     container_name: nextcloud_db
     restart: always
     volumes:
-      - db_data:/var/lib/mysql_nextcloud
+      - db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_DATABASE: nextcloud
