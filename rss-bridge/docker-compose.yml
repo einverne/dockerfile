@@ -2,7 +2,7 @@ version: '3'
 
 services:
   rss-bridge:
-    image: rss-bridge
+    image: einverne/rss-bridge
     container_name: rss-bridge
     restart: unless-stopped
     volumes:
