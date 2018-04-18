@@ -1,0 +1,37 @@
+version: "3"
+services:
+  db:
+    image: mysql:5.7
+    container_name: tt-rss-db
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tt-rss
+      MYSQL_USER: tt-rss
+      MYSQL_PASSWORD: tt-rss
+    networks:
+      - tt-rss-network
+
+  tt-rss:
+    image: tt-rss
+    container_name: tt-rss
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - tt-rss-config:/config
+    ports:
+      - 8081:80
+    environment:
+      PGID: 1001
+      PUID: 1001
+      TZ: Asia/Shanghai
+    networks:
+      - tt-rss-network
+volumes:
+  db_data:
+  tt-rss-config:
+networks:
+  tt-rss-network:
+    driver: bridge

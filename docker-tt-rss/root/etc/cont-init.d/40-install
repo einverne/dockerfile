@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv bash
+
+# install tt-rss
+if [ ! -d /config/www/tt-rss ]; then
+mkdir -p /config/www/tt-rss
+echo "fetching tt-rss files, this may take a little while"
+curl -o /tmp/test.tar.gz -L https://git.tt-rss.org/git/tt-rss/archive/master.tar.gz
+tar xf /tmp/test.tar.gz -C /config/www/tt-rss --strip-components=1
+rm /tmp/test.tar.gz
+fi
+
+# permissions
+chown -R abc:abc \
+	/config/www
