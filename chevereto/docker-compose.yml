@@ -8,7 +8,7 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     ports:
-      - "33061:3306"
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: chevereto_root
       MYSQL_DATABASE: chevereto
@@ -34,10 +34,12 @@ services:
       LETSENCRYPT_EMAIL: admin@einverne.info
     volumes:
       - chevereto:/var/www/html/images
+      - chevereto_content:/var/www/html/content
 
 volumes:
   db_data:
   chevereto:
+  chevereto_content:
 
 networks:
   default:
