@@ -1,7 +1,7 @@
 FROM php:7.1.3-apache
 
 ENV CHEVERETO_APACHE_RUN_USER www-data
-ENV CHEVERETO_VERSION 1.0.9
+ENV CHEVERETO_VERSION 1.0.12
 
 # DB connection environment variables
 ENV CHEVERETO_DB_HOST db
