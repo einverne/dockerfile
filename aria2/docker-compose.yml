@@ -1,0 +1,20 @@
+version: "3"
+services:
+  webui:
+    build: ./
+    #image: einverne/docker-h5ai
+    container_name: aria2-webui
+    restart: always
+    ports:
+      - 6880:80
+      - 6800:6800
+      - 6888:8080
+    volumes:
+      - aria2_data:/data
+      - aria2_conf:/conf
+    environment:
+      SECRET: "secret"
+
+volumes:
+  aria2_data:
+  aria2_conf:
