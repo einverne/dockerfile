@@ -1,0 +1,8 @@
+version: "3"
+services:
+  v2ray:
+    image: einverne/v2ray
+    container_name: v2ray
+    restart: always
+    expose:
+      - 10800
