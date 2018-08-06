@@ -7,12 +7,12 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - db_data:/var/lib/mysql_wordpress
+      - db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress_user
-      MYSQL_PASSWORD: wordpress_pass
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
 
   wordpress:
     image: wordpress:latest
@@ -24,8 +24,8 @@ services:
       - /var/www/html/wp-content:/var/www/html/wp-content 
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress_user
-      WORDPRESS_DB_PASSWORD: wordpress_pass
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
       VIRTUAL_HOST: www.einverne.info
       VIRTUAL_PORT: 80
       LETSENCRYPT_HOST: www.einverne.info
