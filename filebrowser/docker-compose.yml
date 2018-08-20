@@ -5,8 +5,6 @@ services:
     image: filebrowser/filebrowser
     container_name: filebrowser
     restart: unless-stopped
-    ports:
-      - "80:80"
     volumes:
       - ./data:/srv
       - ./config.json:/config.json
