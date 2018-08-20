@@ -38,3 +38,8 @@ docker run -it --name chevereto -d \
     docker-compose up -d
 
 本服务使用 MySQL，如果需要更换可以自行修改 yml 文件
+
+进入容器内部
+
+    sudo docker exec -it chevereto /bin/bash
+    apt install net-tools
