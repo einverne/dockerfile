@@ -1,0 +1,16 @@
+version: "3"
+services:
+  linx-server:
+    image: huginn/huginn
+    container_name: huginn
+    restart: always
+    environment:
+      VIRTUAL_HOST: huginn.einverne.info
+      VIRTUAL_PORT: 3000
+      LETSENCRYPT_HOST: huginn.einverne.info
+      LETSENCRYPT_EMAIL: admin@einverne.info
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
