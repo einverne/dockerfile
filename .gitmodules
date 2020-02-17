@@ -22,3 +22,6 @@
 [submodule "docker-tt-rss"]
 	path = docker-tt-rss
 	url = https://github.com/einverne/docker-tt-rss.git
+[submodule "docker-flexget"]
+	path = docker-flexget
+	url = https://github.com/einverne/docker-flexget
