@@ -25,3 +25,6 @@
 [submodule "docker-flexget"]
 	path = docker-flexget
 	url = https://github.com/einverne/docker-flexget
+[submodule "docker-rutorrent"]
+	path = docker-rutorrent
+	url = https://github.com/einverne/docker-rutorrent
