@@ -1,6 +1,10 @@
 # dockerfile
 一些平常用到的 dockerfile
 
+安装 docker-compose
+
+    bash install_docker_compose.sh
+
 ## docker-h5ai
 使用 docker 显示文件列表
 
