@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  anki-sync-server:
+    container_name: anki-sync-server
+    image: kuklinistvan/anki-sync-server:latest
+    restart: always
+    ports:
+    - "27701:27701"
+    volumes:
+    - ./data:/app/data
