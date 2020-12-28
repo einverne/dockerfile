@@ -1,23 +1,37 @@
 # dockerfile
-一些平常用到的 dockerfile
+dockerfile collection
 
-安装 docker-compose
+install docker-compose
 
     bash install_docker_compose.sh
 
-## docker-h5ai
-使用 docker 显示文件列表
+## Basic tools
+
+### docker-h5ai
+h5ai is a modern HTTP web server index, require HTTP server and PHP
 
 ## docker-nginx-google
 使用 docker 一键反向代理 Google
 
 ## netdata
-netdata 监控 VPS
+netdata now has the official docker support. Recommend using the official image:
 
-    cd netdata
-    docker build -t "netdata" .
-
-netdata 默认的端口在 19999
+```bash
+docker run -d --name=netdata \
+  -p 19999:19999 \
+  -v netdataconfig:/etc/netdata \
+  -v netdatalib:/var/lib/netdata \
+  -v netdatacache:/var/cache/netdata \
+  -v /etc/passwd:/host/etc/passwd:ro \
+  -v /etc/group:/host/etc/group:ro \
+  -v /proc:/host/proc:ro \
+  -v /sys:/host/sys:ro \
+  -v /etc/os-release:/host/etc/os-release:ro \
+  --restart unless-stopped \
+  --cap-add SYS_PTRACE \
+  --security-opt apparmor=unconfined \
+  netdata/netdata
+```
 
 ## weibo-rss
 
@@ -61,12 +75,6 @@ rTorrent 和 ruTorrent 这是个人用过的感觉非常不错的 BitTorrent 客
 ### krusader
 
 - <https://hub.docker.com/r/djaydev/krusader>
-
-### rrshare
-
-这个人人影视的镜像跑起来后对 CPU 的占用异常，个人已经弃用。
-
-- <https://hub.docker.com/r/oldiy/rrshare64>
 
 ### calibre-web
 
