@@ -3,7 +3,7 @@ LABEL maintainer="Ein Verne <einverne@gmail.com>"
 
 ENV TZ 'Asia/Shanghai'
 
-ENV V2RAY_VERSION v3.10
+ENV V2RAY_VERSION v4.31.0
 
 RUN apk upgrade --update \
     && apk add \
@@ -12,7 +12,7 @@ RUN apk upgrade --update \
         curl \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
-    && mkdir -p \ 
+    && mkdir -p \
         /var/log/v2ray \
         /usr/bin/v2ray \
         /tmp/v2ray \
