@@ -1,7 +1,7 @@
 FROM php:7.2.11-apache
 
 ENV CHEVERETO_APACHE_RUN_USER www-data
-ENV CHEVERETO_VERSION 1.1.4
+ENV CHEVERETO_VERSION 1.3.0
 
 # DB connection environment variables
 ENV CHEVERETO_DB_HOST db
@@ -27,7 +27,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
     mysqli \
     pdo \
     pdo_mysql
- 
+
 # Enable mod_rewrite for Chevereto
 RUN a2enmod rewrite
 
