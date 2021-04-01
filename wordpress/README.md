@@ -12,6 +12,11 @@
     volumes:
       - /var/www/html/wp-content:/var/www/html/wp-content 
 
+## 运行无数据库版本
+当使用一台其他的服务器作为 MySQL 数据库时，可以使用 `docker-compose-without-db.yml` 来使用，在配置中修改 db_host 的地址，一般为 IP，然后修改数据库名，数据库用户名和密码。
+
+需要注意的是，这个配置中 WordPress 映射到本地 `/var/www/html/wordpress` 目录。
+
 ## 导出数据库
 使用 `export.sh` 脚本导出当前的数据库，默认只备份 wordpress 数据库，如需备份完整数据库，自行修改
 

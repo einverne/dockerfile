@@ -21,7 +21,7 @@ services:
     depends_on:
       - db
     volumes:
-      - /var/www/html/wp-content:/var/www/html/wp-content 
+      - /var/www/html/wp-content:/var/www/html/wp-content
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
