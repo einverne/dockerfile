@@ -1,0 +1,26 @@
+version: '3'
+services:
+  resilio-sync:
+    container_name: resilio-sync
+    image: linuxserver/resilio-sync
+    restart: always
+    ports:
+      - 55555:55555
+    volumes:
+      - ${RESILIO_SYNC_CONFIG_PATH}:/config
+      - ${RESILIO_SYNC_DOWNLOADS_PATH}:/downloads
+      - ${RESILIO_SYNC_PATH}:/sync
+    environment:
+      - TZ=Asia/Shanghai
+      - PUID=1000
+      - PGID=1000
+      - FILE__PASSWORD=${PASSWORD_FILE_PATH}
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=8888
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
