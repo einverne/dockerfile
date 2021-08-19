@@ -1,0 +1,32 @@
+version: '3'
+services:
+  n8n:
+    container_name: n8n
+    image: n8nio/n8n
+    restart: always
+    volumes:
+      - n8n-volumes:/home/node/.n8n
+    environment:
+      - TZ=Asia/Shanghai
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_HOST=db
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_USER=${POSTGRESDB_USER}
+      - DB_POSTGRESDB_SCHEMA=public
+      - DB_POSTGRESDB_PASSWORD=${POSTGRESDB_PASSWORD}
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=5678
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+volumes:
+  n8n-volumes:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
