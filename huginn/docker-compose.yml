@@ -5,10 +5,16 @@ services:
     container_name: huginn
     restart: always
     environment:
-      VIRTUAL_HOST: huginn.einverne.info
+      HUGINN_DATABASE_ADAPTER: postgresql
+      POSTGRES_PORT_5432_TCP_ADDR: ${POSTGRES_DB_ADDR}
+      POSTGRES_PORT_5432_TCP_PORT: 5432
+      HUGINN_DATABASE_NAME: ${POSTGRES_DATABASE_NAME}
+      HUGINN_DATABASE_USERNAME: ${POSTGRES_USERNAME}
+      HUGINN_DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      VIRTUAL_HOST: ${YOUR_DOMAIN}
       VIRTUAL_PORT: 3000
-      LETSENCRYPT_HOST: huginn.einverne.info
-      LETSENCRYPT_EMAIL: admin@einverne.info
+      LETSENCRYPT_HOST: ${YOUR_DOMAIN}
+      LETSENCRYPT_EMAIL: ${YOUR_EMAIL}
 
 networks:
   default:
