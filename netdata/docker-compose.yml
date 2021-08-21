@@ -3,7 +3,7 @@ services:
   netdata:
     image: netdata/netdata
     container_name: netdata
-    hostname: a400.einverne.info
+    hostname: ${HOSTNAME}
     ports:
       - 19999:19999
     restart: unless-stopped
