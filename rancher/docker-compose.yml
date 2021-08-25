@@ -1,0 +1,18 @@
+version: '3'
+services:
+  rancher:
+    container_name: rancher
+    image: rancher/server
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
