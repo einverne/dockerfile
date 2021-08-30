@@ -6,14 +6,17 @@ services:
     container_name: filebrowser
     restart: unless-stopped
     volumes:
-      - ./data:/srv
-      - ./config.json:/config.json
-      - ./database.db:/database.db
+      - ${HOME_PATH}:/srv
+        #- ${FB_CONFIG_PATH}/.filebrowser.json:/.filebrowser.json
+        #- ${FB_CONFIG_PATH}/database.db:/database.db
     environment:
-      VIRTUAL_HOST: files.einverne.info
-      VIRTUAL_PORT: 80
-      LETSENCRYPT_HOST: files.einverne.info
-      LETSENCRYPT_EMAIL: admin@einverne.info
+      - PUID=1000
+      - PGID=1000
+      - TZ="Asia/Shanghai"
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
 
 networks:
   default:
