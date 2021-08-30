@@ -1,0 +1,41 @@
+version: '3'
+services:
+  miniflux:
+    container_name: miniflux
+    image: miniflux/miniflux:latest
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/miniflux?sslmode=disable
+      - RUN_MIGRATIONS=1
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME={ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+  db:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - miniflux-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "miniflux"]
+      interval: 10s
+      start_period: 30s
+volumes:
+  miniflux-db:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
