@@ -1,6 +1,6 @@
 version: "3"
 services:
-  linx-server:
+  huginn:
     image: huginn/huginn
     container_name: huginn
     restart: always
