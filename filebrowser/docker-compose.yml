@@ -2,19 +2,19 @@ version: '3'
 
 services:
   filebrowser:
-    image: filebrowser/filebrowser
+    image: hurlenko/filebrowser
     container_name: filebrowser
     restart: unless-stopped
     volumes:
-      - ${HOME_PATH}:/srv
-        #- ${FB_CONFIG_PATH}/.filebrowser.json:/.filebrowser.json
-        #- ${FB_CONFIG_PATH}/database.db:/database.db
+      - ${HOME_PATH}:/data
+      - ${FB_CONFIG_PATH}:/config
     environment:
       - PUID=1000
       - PGID=1000
       - TZ="Asia/Shanghai"
+      - FB_BASEURL=/
       - VIRTUAL_HOST=${YOUR_DOMAIN}
-      - VIRTUAL_PORT=80
+      - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=${YOUR_DOMAIN}
       - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
 
