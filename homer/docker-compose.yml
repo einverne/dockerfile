@@ -1,0 +1,22 @@
+version: '3'
+services:
+  homer:
+    container_name: homer
+    image: b4bz/homer
+    restart: always
+    volumes:
+      - ${LOCAL_ASSETS_PATH}:/www/assets
+    environment:
+      - TZ=Asia/Shanghai
+      - UID=1000
+      - GID=1000
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
