@@ -1,0 +1,27 @@
+version: '3'
+services:
+  bookstack:
+    container_name: bookstack
+    image: linuxserver/bookstack
+    restart: always
+    volumes:
+      - ${CONFIG_PATH}:/config
+    environment:
+      - TZ=Asia/Shanghai
+      - PUID=1000
+      - PGID=1000
+      - APP_URL=${APP_URL}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_DATABASE=${DB_DATABASE}
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
