@@ -4,7 +4,7 @@ services:
   geoip-updater:
     image: crazymax/geoip-updater:latest
     volumes:
-      - "./data/geoip:/data"
+      - "${RT_BASE_PATH}/data/geoip:/data"
     env_file:
       - "./geoip-updater.env"
     restart: always
@@ -34,9 +34,9 @@ services:
       - "rtorrent-rutorrent.env"
       - ".env"
     volumes:
-      - "./data:/data"
-      - "./downloads:/downloads"
-      - "./passwd:/passwd"
+      - "${RT_BASE_PATH}/data:/data"
+      - "${RT_BASE_PATH}/downloads:/downloads"
+      - "${RT_BASE_PATH}/passwd:/passwd"
     ulimits:
       nproc: 65535
       nofile:
@@ -50,5 +50,5 @@ services:
     depends_on:
       - rtorrent-rutorrent
     volumes:
-      - "./data/rtorrent/log:/log"
+      - "${RT_BASE_PATH}/data/rtorrent/log:/log"
     restart: always

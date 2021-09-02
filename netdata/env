@@ -4,3 +4,4 @@ HOSTNAME=
 TOKEN=
 # use , between rooms if your want this node to add to multiple rooms
 ROOMS=
+

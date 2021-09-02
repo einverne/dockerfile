@@ -1,0 +1,25 @@
+version: "3"
+services:
+  funkwhale:
+    container_name: funkwhale
+    restart: unless-stopped
+    # change version number here when you want to do an upgrade
+    image: funkwhale/all-in-one:1.1.4
+    env_file: .env
+    environment:
+      # adapt to the pid/gid that own /srv/funkwhale/data
+      PUID: 1000
+      PGID: 1000
+      VIRTUAL_HOST: ${YOUR_DOMAIN}
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: ${YOUR_DOMAIN}
+      LETSENCRYPT_EMAIL: ${YOUR_EMAIL}
+    volumes:
+      - /srv/funkwhale/data:/data
+      - ${PATH_TO_MUSIC}:/music:ro
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
