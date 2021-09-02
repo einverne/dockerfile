@@ -5,6 +5,9 @@ install docker-compose
 
     bash install_docker_compose.sh
 
+
+If there are any environment variables in the docker-compose.yml file, you should create a `.env` under the same folder to setup necessary variables.
+
 ## Basic tools
 
 ### docker-h5ai
