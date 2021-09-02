@@ -1,0 +1,26 @@
+version: "3"
+services:
+  plex:
+    image: ghcr.io/linuxserver/plex
+    container_name: plex
+    #network_mode: host
+    volumes:
+      - ${PLEX_CONFIG}/library:/config
+      - ${PATH_TO_TV}:/tv
+      - ${PATH_TO_MOVIE}:/movies
+    restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM}
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=32400
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
