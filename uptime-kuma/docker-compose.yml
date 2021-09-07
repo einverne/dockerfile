@@ -1,0 +1,22 @@
+version: '3'
+services:
+  uptime-kuma:
+    container_name: uptime-kuma
+    image: louislam/uptime-kuma
+    restart: always
+    volumes:
+      - uptime-kuma:/app/data
+    environment:
+      - TZ=Asia/Shanghai
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=3001
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+
+volumes:
+  uptime-kuma:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
