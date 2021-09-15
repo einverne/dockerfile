@@ -1,0 +1,29 @@
+version: '3'
+services:
+  yourls:
+    container_name: yourls
+    image: yourls
+    restart: always
+    volumes:
+      - ~/yourls/user:/var/www/html/user
+    environment:
+      - TZ=Asia/Shanghai
+      - YOURLS_DB_HOST=${YOURLS_DB_HOST}
+      - YOURLS_DB_USER=${YOURLS_DB_USER}
+      - YOURLS_DB_PASS=${YOURLS_DB_PASS}
+      - YOURLS_DB_PREFIX=${YOURLS_DB_PREFIX:-yourls_}
+      - YOURLS_SITE=${YOURLS_SITE}
+      - YOURLS_HOURS_OFFSET=${YOURLS_HOURS_OFFSET:-+8}
+      - YOURLS_URL_CONVERT=${YOURLS_URL_CONVERT:-62}
+      - YOURLS_USER=${YOURLS_USER}
+      - YOURLS_PASS=${YOURLS_PASS}
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
