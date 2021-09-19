@@ -1,0 +1,27 @@
+version: "3"
+services:
+  calibre-web:
+    image: technosoft2000/calibre-web
+    container_name: calibre-web
+    restart: always
+    volumes:
+      - ~/CalibreBooks:/books
+      - ~/calibre-web/app:/calibre-web/app
+      - ~/calibre-web/kindlegen:/calibre-web/kindlegen
+      - ~/calibre-web/config:/calibre-web/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+      - SET_CONTAINER_TIMEZONE=true
+      - APP_REPO=https://github.com/janeczku/calibre-web.git
+      - USE_CONFIG_DIR=true
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=8083
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
