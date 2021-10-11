@@ -18,7 +18,7 @@ services:
       - LETSENCRYPT_HOST=${YOUR_DOMAIN}
       - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
   db:
-    image: postgres:latest
+    image: fengkx/postgres:13-alpine
     container_name: postgres
     restart: always
     ports:
