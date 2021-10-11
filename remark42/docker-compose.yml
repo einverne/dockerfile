@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  remark42:
+    image: umputun/remark42:latest
+    container_name: "remark42"
+    restart: always
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    environment:
+      - REMARK_URL=${URL}
+      - SITE=${SITE}
+      - SECRET=${SECRET}
+      - STORE_TYPE=bolt
+      - STORE_BOLT_PATH=/srv/var/db
+      - BACKUP_PATH=/srv/var/backup
+      - CACHE_TYPE=mem
+      - DEBUG=true
+      - AUTH_TELEGRAM=${AUTH_TELEGRAM}
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - AUTH_ANON=true
+      - ADMIN_PASSWD=${ADMIN_PASSWD}
+      - AUTH_GITHUB_CID=${AUTH_GITHUB_CID}
+      - AUTH_GITHUB_CSEC=${AUTH_GITHUB_CSEC}
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+    volumes:
+      - ${STORAGE_PATH}:/srv/var
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
