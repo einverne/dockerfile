@@ -1,0 +1,20 @@
+version: "3.3"
+
+services:
+  dashboard:
+    image: ghcr.io/naiba/nezha-dashboard
+    restart: always
+    volumes:
+      - ~/nezha/data:/dashboard/data
+    ports:
+      - 5555:5555
+    environment:
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

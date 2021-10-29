@@ -1,0 +1,19 @@
+debug: false
+site:
+  brand: EV monitor
+  cookiename: nezha-dashboard
+  theme: default
+  customcode: ""
+  viewpassword:
+oauth2:
+  type: github
+  admin: 
+  clientid: 
+  clientsecret: 
+httpport: 80
+grpcport: 5555
+grpchost: 
+enableipchangenotification: false
+cover: 0
+ignoredipnotification: ""
+ignoredipnotificationserverids: {}
