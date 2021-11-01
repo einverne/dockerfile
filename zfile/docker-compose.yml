@@ -1,0 +1,12 @@
+version: "3"
+services:
+  zfile:
+    image: zhaojun1998/zfile:latest
+    container_name: zfile
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ~/zfile/db:/root/.zfile/db
+      - ~/zfile/logs:/root/.zfile/logs
+
