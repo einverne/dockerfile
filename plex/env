@@ -1,6 +1,6 @@
 # obtain a claim token from https://plex.tv/claim and input here. Keep in mind that the claim tokens expire within 4 minutes.
 PLEX_CLAIM=
-PLEX_CONFIG=
+PLEX_CONFIG_PATH=~/plex
 PATH_TO_TV=~/rtorrent/downloads/complete
 PATH_TO_MOVIE=~/rtorrent/downloads/complete
 YOUR_DOMAIN=
