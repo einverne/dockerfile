@@ -1,7 +1,8 @@
-FROM php:7.2.11-apache
+ARG PHP_VERSION=7.4-apache
+FROM alpine as downloader
 
 ENV CHEVERETO_APACHE_RUN_USER www-data
-ENV CHEVERETO_VERSION 1.3.0
+ENV CHEVERETO_VERSION 1.4.0
 
 # DB connection environment variables
 ENV CHEVERETO_DB_HOST db
@@ -18,11 +19,15 @@ LABEL maintainer="Ein Verne <einverne@gmail.com>" \
 
 # Install required packages
 RUN apt-get update && apt-get install -y \
-        libgd-dev
+        libgd-dev && \
 
 # Install php extensions that we need for Chevereto and its installer
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-  && docker-php-ext-install \
+    bash -c 'if [[ $PHP_VERSION == 7.4.* ]]; then \¬
+      docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/; \¬
+    else \¬
+      docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \¬
+    fi' && \¬
+    docker-php-ext-install \
     gd \
     mysqli \
     pdo \
