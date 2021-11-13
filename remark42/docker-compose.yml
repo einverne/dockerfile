@@ -12,6 +12,8 @@ services:
         max-size: "10m"
         max-file: "5"
     environment:
+      - PUID=1000
+      - PGID=1000
       - REMARK_URL=${URL}
       - SITE=${SITE}
       - SECRET=${SECRET}
