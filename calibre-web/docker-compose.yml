@@ -5,10 +5,10 @@ services:
     container_name: calibre-web
     restart: always
     volumes:
-      - ~/CalibreBooks:/books
-      - ~/calibre-web/app:/calibre-web/app
-      - ~/calibre-web/kindlegen:/calibre-web/kindlegen
-      - ~/calibre-web/config:/calibre-web/config
+      - ${CALIBRE_BOOK_PATH}:/books
+      - ${CALIBRE_WEB_CONFIG_PATH}/app:/calibre-web/app
+      - ${CALIBRE_WEB_CONFIG_PATH}/kindlegen:/calibre-web/kindlegen
+      - ${CALIBRE_WEB_CONFIG_PATH}/config:/calibre-web/config
     environment:
       - PUID=1000
       - PGID=1000
