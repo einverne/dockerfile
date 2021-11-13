@@ -15,7 +15,7 @@ services:
       LETSENCRYPT_HOST: ${YOUR_DOMAIN}
       LETSENCRYPT_EMAIL: ${YOUR_EMAIL}
     volumes:
-      - /srv/funkwhale/data:/data
+      - ${FUNKWHALE_DATA_PATH}:/data
       - ${PATH_TO_MUSIC}:/music:ro
 
 networks:
