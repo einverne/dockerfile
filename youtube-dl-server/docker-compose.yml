@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  youtube-dl-server:
+    image: kmb32123/youtube-dl-server:latest
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ~/youtube-dl:/youtube-dl
+#     environment:
+#       - VIRTUAL_HOST=${YOUR_DOMAIN}
+#       - VIRTUAL_PORT=80
+#       - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+#       - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+# 
+# networks:
+#   default:
+#     external:
+#       name: nginx-proxy
