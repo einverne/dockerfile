@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  koel:
+    container_name: koel
+    image: hyzual/koel
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=${DB_HOST}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+    volumes:
+      - ${MUSIC_PATH}:/music:ro
+      - ${COVERS_PATH}:/var/www/html/public/img/covers
+      - ${SEARCH_INDEX_PATH}:/var/www/html/storage/search-indexes

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  koel:
+    container_name: koel
+    image: hyzual/koel
+    restart: always
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=${DB_HOST}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - VIRTUAL_HOST=${YOUR_DOMAIN}
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
+      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+    volumes:
+      - ${MUSIC_PATH}:/music
+      - ${COVERS_PATH}:/var/www/html/public/img/covers
+      - ${SEARCH_INDEX_PATH}:/var/www/html/storage/search-indexes
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

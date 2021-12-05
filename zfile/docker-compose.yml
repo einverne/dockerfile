@@ -9,4 +9,5 @@ services:
     volumes:
       - ~/zfile/db:/root/.zfile/db
       - ~/zfile/logs:/root/.zfile/logs
+      - /mnt/storage:/mnt/storage
 
