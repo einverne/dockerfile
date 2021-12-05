@@ -1,20 +1,22 @@
 version: "3"
 services:
   linx-server:
-    image: einverne/linx-server
+    image: andreimarcu/linx-server
     container_name: linx-server
     restart: always
+    command: -config /data/linx-server.conf
     volumes:
-      - /var/www/linx/meta:/data/meta
-      - /var/www/linx/files:/data/files
-    expose:
-      - 80
-      - 443
+      - ~/linx/meta:/data/meta
+      - ~/linx/files:/data/files
+      - ./config.conf:/data/linx-server.conf
     environment:
-      VIRTUAL_HOST: linx.einverne.info
-      VIRTUAL_PORT: 8080
-      LETSENCRYPT_HOST: linx.einverne.info
-      LETSENCRYPT_EMAIL: admin@einverne.info
+      - TZ=Asia/Shanghai
+      - PUID=1000
+      - PGID=1000
+      - VIRTUAL_HOST=linx.einverne.info
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=linx.einverne.info
+      - LETSENCRYPT_EMAIL=admin@einverne.info
 
 networks:
   default:
