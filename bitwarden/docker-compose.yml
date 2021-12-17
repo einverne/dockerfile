@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  bitwarden:
+    image: vaultwarden/server:latest
+    restart: always
+    volumes:
+      - ~/bitwarden/bw-data:/data
+    environment:
+      - DOMAIN=${DOMAIN}
+      - WEBSOCKET_ENABLED=true # Required to use websockets
+      - SIGNUPS_ALLOWED=false   # set to false to disable signups
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_FROM=${SMTP_FROM}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_SSL=${SMTP_SSL}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+
+  caddy:
+    image: abiosoft/caddy
+    restart: always
+    volumes:
+      - ~/bitwarden/Caddyfile:/etc/Caddyfile:ro
+      - caddycerts:/root/.caddy
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - ACME_AGREE=true              # agree to Let's Encrypt Subscriber Agreement
+      - DOMAIN=${DOMAIN} # CHANGE THIS! Used for Auto Let's Encrypt SSL
+      - EMAIL=${EMAIL}  # CHANGE THIS! Optional, provided to Let's Encrypt
+
+volumes:
+  caddycerts:
+
