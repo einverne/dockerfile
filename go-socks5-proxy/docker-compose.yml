@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  go-socks5-proxy:
+    container_name: socks5
+    image: serjs/go-socks5-proxy
+    ports:
+      - '1090:1080'
+    environment:
+      - PROXY_USER=${USER}
+      - PROXY_PASSWORD=${PASSWD}
+    restart: always
+

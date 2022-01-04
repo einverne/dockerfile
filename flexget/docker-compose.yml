@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  flexget:
+    image: wiserain/flexget
+    restart: always
+    container_name: flexget
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - FG_WEBUI_PASSWD=${PASSWD}
+      - FG_LOG_LEVEL=info
+      - TZ=Asia/Shanghai
+    ports:
+      - '5050:5050'
+    volumes:
+      - '~/flexget/config:/config'
+      - '~/rwatch:/data'
+

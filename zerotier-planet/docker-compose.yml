@@ -12,7 +12,7 @@ services:
       - NODE_ENV=${NODE_ENV}
       - HTTP_PORT=${HTTP_PORT}
       - HTTP_ALL_INTERFACES=yes
-      - ZTNCUI_PASSWD=${ZTNCUI_PASSWORD}
+      - ZTNCUI_PASSWD=${ZTNCUI_PASSWD}
       - MYADDR=${MYADDR}
     ports:
       - '3443:3443'

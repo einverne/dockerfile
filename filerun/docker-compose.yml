@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  filerun:
+    image: afian/filerun
+    container_name: filerun
+    environment:
+      FR_DB_HOST: ${DB_HOST}
+      FR_DB_PORT: ${DB_PORT}
+      FR_DB_NAME: ${DB_NAME}
+      FR_DB_USER: ${DB_USER}
+      FR_DB_PASS: ${DB_PASS}
+      APACHE_RUN_USER: www-data
+      APACHE_RUN_USER_ID: 1000
+      APACHE_RUN_GROUP: www-data
+      APACHE_RUN_GROUP_ID: 1000
+    ports:
+      - "30080:80"
+    volumes:
+      - /share/filerun/html:/var/www/html
+      - /share/filerun/user-files:/user-files
+    restart: unless-stopped

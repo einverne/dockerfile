@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  zerotier-moon:
+    image: ghcr.io/rwv/zerotier-moon
+    container_name: "zerotier-moon"
+    restart: always
+    ports:
+      - "9993:9993/udp"
+    volumes:
+      - ~/zerotier-moon/config:/var/lib/zerotier-one
+    entrypoint:
+      - /startup.sh
+      - "-4"
+      - ${IP}
+

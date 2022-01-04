@@ -2,12 +2,12 @@ version: '3'
 services:
   rancher:
     container_name: rancher
-    image: rancher/server
+    image: rancher/rancher
     restart: always
     environment:
       - TZ=Asia/Shanghai
       - VIRTUAL_HOST=${YOUR_DOMAIN}
-      - VIRTUAL_PORT=8080
+      - VIRTUAL_PORT=80
       - LETSENCRYPT_HOST=${YOUR_DOMAIN}
       - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
 

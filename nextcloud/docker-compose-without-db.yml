@@ -1,0 +1,23 @@
+version: "3"
+services:
+  nextcloud:
+    image: nextcloud:apache
+    container_name: nextcloud
+    restart: always
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - MYSQL_PASSWORD=
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+      - VIRTUAL_HOST=nc.einverne.info
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=nc.einverne.info
+      - LETSENCRYPT_EMAIL=admin@einverne.info
+volumes:
+  nextcloud:
+networks:
+  default:
+    external:
+      name: nginx-proxy
