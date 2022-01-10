@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  storagenode:
+    image: 'storjlabs/storagenode:latest'
+    container_name: storagenode
+    restart: unless-stopped
+    ports:
+      - '28967:28967/tcp'
+      - '28967:28967/udp'
+      - '127.0.0.1:14002:14002'
+    volumes:
+      - ${IDENTITY_PATH}:/app/identity
+      - ${APP_CONFIG}:/app/config
+    environment:
+      - WALLET=${WALLET}
+      - EMAIL=${EMAIL}
+      - 'ADDRESS=${ADDRESS}'
+      - STORAGE=2TB
