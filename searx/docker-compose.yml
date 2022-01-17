@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  searx:
+    image: searx/searx:${SEARX_VERSION:-latest}
+    command: -f
+    volumes:
+      - '~/searx/searx/:/etc/searx:rw'
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:8080/healthz || exit 1"]
+    restart: always
+    environment:
+      - 'BIND_ADDRESS=0.0.0.0:8080'
+      - 'BASE_URL=https://searx.${SITE:-localhost}/'
+      - 'MORTY_URL=http://morty/'
+      - 'MORTY_KEY=${MORTY_KEY}'
+    depends_on:
+      - morty
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.searx.rule=Host(`searx.${SITE:-localhost}`)'
+      - 'traefik.http.services.searx.loadbalancer.server.port=8080'
+
+  morty:
+    image: dalf/morty:${MORTY_VERSION:-latest}
+    command: -listen 0.0.0.0:3000 -timeout 6 -ipv6
+    restart: always
+    environment:
+      - 'MORTY_KEY=${MORTY_KEY}'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.morty.rule=Host(`morty.${SITE:-localhost}`)'
+      - 'traefik.http.services.morty.loadbalancer.server.port=3000'
+      - 'traefik.http.routers.morty.middlewares=auth'
+
+networks:
+  default:
+    external:
+      name: traefik
+
