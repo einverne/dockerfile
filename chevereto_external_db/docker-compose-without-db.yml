@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  chevereto:
+    image: chevereto:latest
+    container_name: chevereto
+    restart: always
+    environment:
+      CHEVERETO_DB_HOST: ${DB_HOST}
+      CHEVERETO_DB_USERNAME: ${DB_USERNAME}
+      CHEVERETO_DB_PASSWORD: ${DB_PASSWORD}
+      CHEVERETO_DB_NAME: ${DB_NAME}
+      CHEVERETO_DB_PREFIX: chv_
+      VIRTUAL_HOST: ${DOMAIN}
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: ${DOMAIN}
+      LETSENCRYPT_EMAIL: ${EMAIL}
+    volumes:
+      - ~/chevereto/chevereto:/var/www/html/images
+      - ~/chevereto/chevereto_content:/var/www/html/content
+      - ./upload.ini:/usr/local/etc/php/conf.d/uploads.ini
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
