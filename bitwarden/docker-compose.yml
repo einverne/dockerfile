@@ -22,7 +22,7 @@ services:
     restart: always
     volumes:
       - ~/bitwarden/Caddyfile:/etc/Caddyfile:ro
-      - caddycerts:/root/.caddy
+      - ~/bitwarden/caddy:/root/.caddy
     ports:
       - 80:80
       - 443:443
@@ -30,7 +30,4 @@ services:
       - ACME_AGREE=true              # agree to Let's Encrypt Subscriber Agreement
       - DOMAIN=${DOMAIN} # CHANGE THIS! Used for Auto Let's Encrypt SSL
       - EMAIL=${EMAIL}  # CHANGE THIS! Optional, provided to Let's Encrypt
-
-volumes:
-  caddycerts:
 
