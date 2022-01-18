@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  whoami:
+    image: traefik/whoami
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
+
+# 先创建外部网卡
+# docker network create traefik
+networks:
+  default:
+    external:
+      name: traefik

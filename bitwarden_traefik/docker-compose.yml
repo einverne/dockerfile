@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  bitwarden:
+    image: vaultwarden/server:latest
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ~/bitwarden/bw-data:/data
+    environment:
+      - DOMAIN=${DOMAIN}
+      - WEBSOCKET_ENABLED=true # Required to use websockets
+      - SIGNUPS_ALLOWED=false   # set to false to disable signups
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_FROM=${SMTP_FROM}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_SSL=${SMTP_SSL}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bitwarden.rule=Host(`${SITE:-localhost}`)"
+      - "traefik.http.services.bitwarden.loadbalancer.server.port=80"
+      - "traefik.http.routers.bitwarden.service=bitwarden"
+      - "traefik.http.routers.bitwarden-websocket.rule=Host(`${SITE:-localhost}`) && Path(`/notifications/hub`)"
+      - "traefik.http.routers.bitwarden-websocket.service=bitwarden-websocket"
+      - "traefik.http.services.bitwarden-websocket.loadbalancer.server.port=3012"
+
+networks:
+  default:
+    external:
+      name: traefik
