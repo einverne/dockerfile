@@ -18,11 +18,11 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}
 
   caddy:
-    image: abiosoft/caddy
+    image: caddy:2.4.6
     restart: always
     volumes:
-      - ~/bitwarden/Caddyfile:/etc/Caddyfile:ro
-      - ~/bitwarden/caddy:/root/.caddy
+      - ~/bitwarden/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ~/bitwarden/caddy:/root/.local/share/caddy
     ports:
       - 80:80
       - 443:443
