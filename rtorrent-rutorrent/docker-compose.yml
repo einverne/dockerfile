@@ -30,6 +30,9 @@ services:
       - target: ${RT_INC_PORT}
         published: ${RT_INC_PORT}
         protocol: tcp
+      - target: ${XMLRPC_PORT}
+        published: ${XMLRPC_PORT}
+        protocol: tcp
     env_file:
       - "rtorrent-rutorrent.env"
       - ".env"
