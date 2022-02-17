@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  haste:
+    image: mkodockx/docker-pastebin:latest
+    restart: always
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.pastebin.rule=Host(`pb.docker.localhost`)'
+      - 'traefik.http.services.pastebin.loadbalancer.server.port=80'
+
+networks:
+  default:
+    external:
+      name: traefik
