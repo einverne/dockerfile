@@ -8,6 +8,45 @@ install docker-compose
 
 If there are any environment variables in the docker-compose.yml file, you should create a `.env` under the same folder to setup necessary variables.
 
+## Environment Files
+
+To keep secrets safe I use `.env` files in docker-compose.yml for secrets and passwords. If you see variables like `$` in `docker-compose.yml` file,
+there should be `.env` file under the same directory.
+
+## Usage
+Basic usage:
+
+	git clone https://github.com/einverne/dockerfile.git
+	cd application_name/
+	docker-compose up -d
+	# to check log
+	docker-compose logs -f
+
+Application | Description | Additional
+----------|----------|----------
+AdGuardHome | AdGuard Home is a network-wide software for blocking ads & tracking. | [More](adguardhome)
+Anki Sync Server | |
+archivebox | |
+aria2 | |
+aurora(极光面板) | |
+Bitwarden | |
+BookStack | |
+cadvisor | |
+calibre-web | |
+chevereto | |
+epic | |
+filebrowser | |
+filerun | |
+flexget | |
+freshrss | |
+frp | |
+funkwhale | |
+go-socks5-proxy | |
+gogs | |
+homer | |
+huginn | |
+
+
 ## Basic tools
 
 ### docker-h5ai
