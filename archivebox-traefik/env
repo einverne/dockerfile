@@ -1,0 +1,5 @@
+DOCKER_IMAGE=archivebox/archivebox:latest
+YOUR_DOMAIN=box.example.com
+SITE=box.example.com
+YOUR_EMAIL=admin@example.com
+DATA_PATH=~/archivebox-data
