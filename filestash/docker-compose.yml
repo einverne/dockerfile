@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  filestash:
+    image: machines/filestash
+    container_name: filestash
+    restart: always
+    environment:
+      - APPLICATION_URL=${SITE}
+      # - ONLYOFFICE_URL=http://onlyoffice
+    volumes:
+      - ${FILESTASH_CONFIG_PATH}:/app/data/state
+
+  #  onlyoffice:
+  #    container_name: filestash_oods
+  #    image: onlyoffice/documentserver
+  #    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.filestash.service=filestash"
+      - "traefik.http.routers.filestash.rule=Host(`${SITE:-localhost}`)"
+      - "traefik.http.services.filestash.loadbalancer.server.port=8334"
+
+
+networks:
+  default:
+    external:
+      name: traefik
