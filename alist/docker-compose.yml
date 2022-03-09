@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  alist:
+    image: 'xhofe/alist:latest'
+    restart: always
+    volumes:
+      - '${ALIST_CONFIG_PATH}:/opt/alist/data'
+    container_name: alist
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.alist.service=alist"
+      - "traefik.http.routers.alist.rule=Host(`${SITE:-localhost}`)"
+      - "traefik.http.services.alist.loadbalancer.server.port=5244"
+
+networks:
+  default:
+    external:
+      name: traefik
+
