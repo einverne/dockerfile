@@ -5,13 +5,13 @@ services:
     image: lscr.io/linuxserver/qbittorrent
     container_name: qbittorrent
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=Asia/Shanghai
       - WEBUI_PORT=8080
     volumes:
-      - ~/qbittorrent/config:/config
-      - ~/qbittorrent/downloads:/downloads
+      - ${QB_CONFIG}:/config
+      - ${QB_DATA_PATH}/downloads:/downloads
     ports:
       - 49153:49153
       - 49153:49153/udp
