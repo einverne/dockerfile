@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  poste:
+    image: analogic/poste.io
+    hostname: ${SITE}
+    container_name: poste
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${POSTE_DATA}:/data
+      - ${POSTE_NGINX_LOG}:/var/log/nginx/
+    ports:
+      - "25:25"
+      - "110:110"
+      - "143:143"
+      - "465:465"
+      - "587:587"
+      - "993:993"
+      - "995:995"
+      - "4190:4190"
+    environment:
+      - TZ=Asia/Shanghai
+      - DISABLE_CLAMAV=TRUE
+      - DISABLE_RSPAMD=TRUE
+      - HTTPS=OFF
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.poste.rule=Host(`${SITE:-localhost}`)"
+      - "traefik.http.services.poste.loadbalancer.server.port=80"
+      - "traefik.http.routers.poste.service=poste"
+
+networks:
+  default:
+    external:
+      name: traefik

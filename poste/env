@@ -1,0 +1,3 @@
+SITE=mail.example.com
+POSTE_DATA=~/poste/data
+POSTE_NGINX_LOG=~/poste/nginx/log
