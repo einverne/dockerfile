@@ -1,0 +1,3 @@
+LOCAL_ASSETS_PATH=~/homer/
+YOUR_DOMAIN=homer.example.com
+YOUR_EMAIL=admin@example.com
