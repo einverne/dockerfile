@@ -13,6 +13,6 @@ services:
       - 21027:21027/udp
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=Asia/Shanghai
