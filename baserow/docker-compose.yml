@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  baserow:
+    container_name: baserow
+    environment:
+      - 'BASEROW_PUBLIC_URL=http://localhost:8081'
+    volumes:
+      - '~/baserow_data:/baserow/data'
+    ports:
+      - '8081:80'
+    restart: unless-stopped
+    image: 'baserow/baserow:1.9.1'
