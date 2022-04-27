@@ -4,6 +4,7 @@ services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent
     container_name: qbittorrent
+    restart: unless-stopped
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -12,8 +13,8 @@ services:
     volumes:
       - ${QB_CONFIG}:/config
       - ${QB_DATA_PATH}/downloads:/downloads
+      - ${QB_DATA_PATH}/watch:/watch
     ports:
       - 49153:49153
       - 49153:49153/udp
       - 8080:8080
-    restart: unless-stopped
