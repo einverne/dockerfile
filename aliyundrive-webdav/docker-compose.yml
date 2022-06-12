@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+  aliyundrive-webdav:
+    image: messense/aliyundrive-webdav
+    container_name: aliyundrive-webdav
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    environment:
+      - 'REFRESH_TOKEN=${REFRESH_TOKEN}'
+      - 'WEBDAV_AUTH_USER=${USER}'
+      - 'WEBDAV_AUTH_PASSWORD=${PASSWORD}'
