@@ -1,0 +1,8 @@
+version: '3.3'
+
+services:
+  httpbin:
+    image: kennethreitz/httpbin
+    restart: always
+    ports:
+      - '${HTTP_PORT}:80'
