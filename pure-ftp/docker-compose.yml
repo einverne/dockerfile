@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  pure-ftpd:
+    image: stilliard/pure-ftpd
+    restart: always
+    container_name: ftpd_server
+    ports:
+      - '${PORT}:21'
+      - '30000-30009:30000-30009'
+    volumes:
+      - ${PATH_TO_DATA}:${FTP_USER_HOME}
+    environment:
+      - 'FTP_PASSIVE_PORTS=30000:30009'
+      - FTP_USER_HOME=${FTP_USER_HOME}
+      - FTP_USER_NAME=${FTP_USER_NAME}
+      - FTP_USER_PASS=${FTP_USER_PASS}
+      - PUBLICHOST=${PUBLICHOST}
+

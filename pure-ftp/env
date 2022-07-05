@@ -1,0 +1,6 @@
+PORT=21
+PATH_TO_DATA=/home/einverne/Downloads
+FTP_USER_HOME=/home/einverne
+FTP_USER_NAME=yourname
+FTP_USER_PASS=password
+PUBLICHOST=localhost
