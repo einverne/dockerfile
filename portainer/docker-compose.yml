@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer
+    privileged: true
+    volumes:
+      - '${PORTAINER_DATA_PATH}/data:/data'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    restart: unless-stopped
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
