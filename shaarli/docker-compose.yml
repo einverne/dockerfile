@@ -5,8 +5,11 @@ services:
     image: shaarli/shaarli:latest
     container_name: shaarli
     restart: always
-    ports:
-      - '${PORT}:80'
     volumes:
-      - '${SHAARLI_DATA}:/var/www/shaarli/data'
-      - '${SHAARLI_CACHE}:/var/www/shaarli/cache'
+      - '${SHAARLI_DATA}/data:/var/www/shaarli/data'
+      - '${SHAARLI_DATA}/cache:/var/www/shaarli/cache'
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
