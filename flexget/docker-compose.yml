@@ -6,14 +6,14 @@ services:
     restart: always
     container_name: flexget
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - FG_WEBUI_PASSWD=${PASSWD}
       - FG_LOG_LEVEL=info
-      - TZ=Asia/Shanghai
+      - TZ=${TZ}
     ports:
-      - '5050:5050'
+      - '${PORT}:5050'
     volumes:
-      - '~/flexget/config:/config'
-      - '~/rwatch:/data'
+      - '${CONFIG_PATH}:/config'
+      - '${DATA_PATH}:/data'
 

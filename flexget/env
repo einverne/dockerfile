@@ -1,0 +1,7 @@
+PUID=1000
+PGID=1000
+TZ=Asia/Shanghai
+PASSWD=your_password
+PORT=5050
+CONFIG_PATH=~/flexget/config
+DATA_PATH=~/path/to/watch_folder
