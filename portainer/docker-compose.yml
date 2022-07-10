@@ -2,12 +2,16 @@ version: '3'
 
 services:
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer-ce:lastest
+    container_name: portainer
+    restart: always
     privileged: true
+    ports:
+      - 8000:8000
+      - 9443:9443
     volumes:
       - '${PORTAINER_DATA_PATH}/data:/data'
       - '/var/run/docker.sock:/var/run/docker.sock'
-    restart: unless-stopped
 
 networks:
   default:
