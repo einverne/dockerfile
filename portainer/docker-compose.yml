@@ -2,7 +2,7 @@ version: '3'
 
 services:
   portainer:
-    image: portainer/portainer-ce:lastest
+    image: portainer/portainer-ce:latest
     container_name: portainer
     restart: always
     privileged: true
