@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  owncast:
+    image: 'gabekangas/owncast:latest'
+    restart: always
+    volumes:
+      - '${CONFIG_PATH}/data:/app/data'
+    ports:
+      - '8080:8080'
+      - '1935:1935'
+
