@@ -7,11 +7,14 @@ services:
     network_mode: host
     restart: always
     volumes:
-      - ${PLEX_CONFIG_PATH}:/config
+      - ${PLEX_CONFIG_PATH}/library:/config
       - ${PATH_TO_MEDIA}:/media:ro
+      - ${PATH_TO_MOVIE}:/movies:ro
+      - ${PATH_TO_TV}:/tv:ro
+      - ${PATH_TO_MUSIC}:/Music:ro
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - VERSION=docker
       - TZ=Asia/Shanghai
       - PLEX_CLAIM=${PLEX_CLAIM}
