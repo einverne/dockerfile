@@ -73,7 +73,7 @@ services:
       options:
         max-size: "10m"
   web:
-    image: tootsuite/mastodon:v3.4.4
+    image: tootsuite/mastodon:v3.5.3
     restart: always
     env_file: .env.production
     environment:
@@ -96,7 +96,7 @@ services:
       - db
       - redis
   streaming:
-    image: tootsuite/mastodon:v3.4.4
+    image: tootsuite/mastodon:v3.5.3
     env_file: .env.production
     restart: always
     command: node ./streaming
@@ -120,7 +120,7 @@ services:
       - redis
 
   sidekiq:
-    image: tootsuite/mastodon:v3.4.4
+    image: tootsuite/mastodon:v3.5.3
     environment:
       - "RAILS_ENV=production"
     env_file: .env.production
