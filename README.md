@@ -1,5 +1,5 @@
 # dockerfile
-dockerfile collection
+This is a personal dockerfile collection, I use these configurations to practice "Infrastructure as Code".
 
 install docker-compose
 
@@ -13,7 +13,7 @@ If there are any environment variables in the docker-compose.yml file, you shoul
 To keep secrets safe I use `.env` files in docker-compose.yml for secrets and passwords. If you see variables like `$` in `docker-compose.yml` file,
 there should be `.env` file under the same directory.
 
-## Usage
+## How to use
 Basic usage:
 
 	git clone https://github.com/einverne/dockerfile.git
