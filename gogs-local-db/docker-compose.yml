@@ -2,20 +2,15 @@ version: "3"
 
 services:
   gogs:
-    image: gogs/gogs:0.12.3
+    image: gogs/gogs:0.12.9
     container_name: gogs
     restart: always
     volumes:
-      - ~/gogs:/data
+      - ${GOGS_DATA_PATH}:/data
     ports:
-      - "10022:22"
-    environment:
-      VIRTUAL_HOST: ${DOMAIN}
-      VIRTUAL_PORT: 3000
-      LETSENCRYPT_HOST: ${DOMAIN}
-      LETSENCRYPT_EMAIL: ${EMAIL}
+      - "${SSH_PORT}:22"
 
 networks:
   default:
-    external:
-      name: nginx-proxy
+    external: true
+    name: nginx-proxy
