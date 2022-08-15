@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  app:
+    container_name: beancount-gs
+    image: xdbin/beancount-gs:latest
+    ports:
+      - "10000:80"
+    command: >
+      sh -c "cp -rn /app/public/default_icons/* /app/public/icons && ./beancount-gs -p 80"
+    volumes:
+      - "${dataPath:-/data/beancount}:${dataPath:-/data/beancount}"
+      - "${dataPath:-/data/beancount}/icons:/app/public/icons"
+      - "${dataPath:-/data/beancount}/config:/app/config"
+      - "${dataPath:-/data/beancount}/bak:/app/bak"
