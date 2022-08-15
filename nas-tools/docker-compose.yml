@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  nas-tools:
+    image: jxxghp/nas-tools:latest
+    container_name: nas-tools
+    restart: always
+    ports:
+      - 3000:3000        # 默认的webui控制端口
+    volumes:
+      - ${NAS_TOOLS_CONFIG}/config:/config
+      - ${MEDIA_PATH}:${MEDIA_PATH_IN_CONTAINER}
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - NASTOOL_AUTO_UPDATE=false  # 如需在启动容器时自动升级程程序请设置为true
+    network_mode: bridge
+    hostname: nas-tools

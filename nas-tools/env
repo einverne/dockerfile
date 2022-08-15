@@ -1,0 +1,6 @@
+PUID=1000
+PGID=1000
+UMASK=022
+NAS_TOOLS_CONFIG=~/nas_tools_config/
+MEDIA_PATH=/path/to/media
+MEDIA_PATH_IN_CONTAINER=/path/in/container
