@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent
+    image: linuxserver/qbittorrent
     container_name: qbittorrent
     restart: unless-stopped
     environment:
