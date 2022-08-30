@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  qinglong:
+    container_name: qinglong
+    image: 'whyour/qinglong:latest'
+    restart: unless-stopped
+    hostname: qinglong
+    volumes:
+      - '${QINGLONG_DATA}:/ql/data'
+    #ports:
+    #- '5700:5700'
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
+
