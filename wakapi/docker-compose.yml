@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  muety:
+    image: 'ghcr.io/muety/wakapi:latest'
+    container_name: wakapi
+    restart: always
+    #ports:
+    #  - '3000:3000'
+    environment:
+      - WAKAPI_PASSWORD_SALT=$SALT
+    volumes:
+      - '${WAKAPI_DATA}:/data'
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
