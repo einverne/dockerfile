@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  sftp:
+    image: 'atmoz/sftp'
+    restart: always
+    ports:
+      - '${PORT}:22'
+    volumes:
+      - '${SFTP_PATH}/upload:/home/foo/upload'
+      - '${SFTP_CONFIG}:/etc/sftp/users.conf:ro'
