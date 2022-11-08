@@ -1,20 +1,23 @@
 version: "3"
+
 services:
   wordpress:
     image: wordpress:latest
     container_name: wordpress
     restart: always
     volumes:
-      - /var/www/html/wordpress/:/var/www/html/
+      - ~/wordpress/html/:/var/www/html/
+      - ./upload.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
-      WORDPRESS_DB_HOST: db_host:3306
-      WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_USER: wordpress_user
-      WORDPRESS_DB_PASSWORD: wordpress_password
-      VIRTUAL_HOST: www.einverne.info
+      WORDPRESS_DB_HOST: ${DB_HOST}
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      VIRTUAL_HOST: ${HOST}
       VIRTUAL_PORT: 80
-      LETSENCRYPT_HOST: www.einverne.info
-      LETSENCRYPT_EMAIL: admin@einverne.info
+      LETSENCRYPT_HOST: ${HOST}
+      LETSENCRYPT_EMAIL: ${EMAIL}
+
 networks:
   default:
     external:
