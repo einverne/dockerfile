@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  memos:
+    image: 'neosmemo/memos:latest'
+    container_name: memos
+    restart: always
+    ports:
+      - '5230:5230'
+    volumes:
+      - '${PATH_TO_MEMOES}:/var/opt/memos'
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
+
