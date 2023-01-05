@@ -7,12 +7,10 @@ services:
     container_name: qiandao
     depends_on:
       - redis
-    ports:
-      - "8923:80"
     volumes:
       - "${QIANDAO_CONFIG}:/usr/src/app/config"
     environment:
-      # - QIANDAO_DEBUG=False
+      - QIANDAO_DEBUG=False
       # - MULTI_PROCESS=False
       # - AUTO_RELOAD=False
       # - GZIP=True
@@ -83,3 +81,9 @@ services:
     volumes:
       # - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:rw
       - ./redis/data:/data:rw
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
+
