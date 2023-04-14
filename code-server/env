@@ -1,0 +1,11 @@
+PUID=1000
+PGID=1000
+TZ=Asia/Shanghai
+PASSWORD=
+HASHED_PASSWORD=
+SUDO_PASSWORD=
+SUDO_PASSWORD_HASHED=
+PROXY_DOMAIN=code.yourdomain.com
+DEFAULT_WORKSPACE=/config/workspace
+CONFIG_PATH=~/code-server/appdata/config
+PORT=8443
