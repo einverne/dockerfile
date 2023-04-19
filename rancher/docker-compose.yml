@@ -4,15 +4,15 @@ services:
     container_name: rancher
     image: rancher/rancher
     restart: always
+    privileged: true
+    ports:
+      - 80:80
+      - 443:443
     environment:
       - TZ=Asia/Shanghai
-      - VIRTUAL_HOST=${YOUR_DOMAIN}
-      - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
-      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
 
-networks:
-  default:
-    external:
-      name: nginx-proxy
+        #networks:
+        #  default:
+        #    name: nginx-proxy
+        #    external: true
 
