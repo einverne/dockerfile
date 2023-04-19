@@ -80,7 +80,7 @@ services:
     # command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
       # - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:rw
-      - ./redis/data:/data:rw
+      - ${REDIS_DATA}/redis/data:/data:rw
 
 networks:
   default:
