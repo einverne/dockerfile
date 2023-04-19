@@ -7,6 +7,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
     environment:
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/miniflux?sslmode=disable
       - RUN_MIGRATIONS=1
@@ -35,7 +37,7 @@ services:
 volumes:
   miniflux-db:
 
-networks:
-  default:
-    external: true
-    name: nginx-proxy
+    #networks:
+    #  default:
+    #    external: true
+    #    name: nginx-proxy
