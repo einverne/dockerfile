@@ -1,0 +1,13 @@
+---
+version: '3'
+
+services:
+  umami:
+    image: docker.umami.dev/umami-software/umami:mysql-latest
+    ports:
+      - "${PORT}:3000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_TYPE: mysql
+      APP_SECRET: ${APP_SECRET}
+    restart: always

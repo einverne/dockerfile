@@ -1,0 +1,4 @@
+PORT=3000
+DATABASE_URL=mysql://username:password@host/umami-db?sslaccept=strict
+# openssl rand -hex 32
+APP_SECRET=
