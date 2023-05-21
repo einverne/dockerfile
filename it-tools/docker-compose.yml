@@ -1,9 +1,9 @@
 version: '3.3'
 
 services:
-	corentinth:
-		container_name: it-tools
-		image: 'ghcr.io/corentinth/it-tools:latest'
-		restart: unless-stopped
-		ports:
-			- '8080:80'
+  corentinth:
+    container_name: it-tools
+    image: 'ghcr.io/corentinth/it-tools:latest'
+    restart: unless-stopped
+    ports:
+      - '8080:80'
