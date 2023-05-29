@@ -5,6 +5,7 @@ install docker-compose
 
     bash install_docker_compose.sh
 
+I personally use my [dotfiles](https://github.com/einverne/dotfiles) to automatically install the docker-compose.
 
 If there are any environment variables in the docker-compose.yml file, you should create a `.env` under the same folder to setup necessary variables.
 
@@ -22,29 +23,29 @@ Basic usage:
 	# to check log
 	docker-compose logs -f
 
-Application | Description | Additional
-----------|----------|----------
-AdGuardHome | AdGuard Home is a network-wide software for blocking ads & tracking. | [More](adguardhome)
-Anki Sync Server | |
-archivebox | |
-aria2 | |
-aurora(极光面板) | |
-Bitwarden | |
-BookStack | |
-cadvisor | |
-calibre-web | |
-chevereto | |
-epic | |
-filebrowser | |
-filerun | |
-flexget | |
-freshrss | |
-frp | |
-funkwhale | |
-go-socks5-proxy | |
-gogs | |
-homer | |
-huginn | |
+| Application | Description | Additional
+|-----------|----------|----------
+| AdGuardHome | AdGuard Home is a network-wide software for blocking ads & tracking. | [More](adguardhome)
+| Anki Sync Server | |
+| archivebox | |
+| aria2 | |
+| aurora（极光面板） | |
+| Bitwarden | |
+| BookStack | |
+| cadvisor | |
+| calibre-web | |
+| chevereto | |
+| epic | |
+| filebrowser | |
+| filerun | |
+| flexget | |
+| freshrss | |
+| frp | |
+| funkwhale | |
+| go-socks5-proxy | |
+| gogs | |
+| homer | |
+| huginn | |
 
 
 ## Basic tools
@@ -53,7 +54,7 @@ huginn | |
 h5ai is a modern HTTP web server index, require HTTP server and PHP
 
 ## docker-nginx-google
-使用 docker 一键反向代理 Google
+use docker to proxy Google
 
 ## netdata
 netdata now has the official docker support. Recommend using the official image:
@@ -77,15 +78,13 @@ docker run -d --name=netdata \
 
 ## weibo-rss
 
-将微博内容输出到 RSS
+weibo to rss
 
 ## headless-chrome
-
-顾名思义
-
+build a headless-chrome
 
 
-## 一些常用镜像
+## Some useful images
 
 ### Transmission
 
