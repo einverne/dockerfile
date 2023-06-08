@@ -1,0 +1,4 @@
+DB_PASSWORD=password
+DB_USER=username
+DB_NAME=name
+LISTMON_CONFIG=~/listmonk

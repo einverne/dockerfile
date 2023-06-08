@@ -4,22 +4,22 @@ x-app-defaults: &app-defaults
   restart: unless-stopped
   image: listmonk/listmonk:latest
   ports:
-    - "9000:9000"
+    - "${PORT:-9000}:9000"
   networks:
     - listmonk
   environment:
-    - TZ=${TIMEZONE}
+    - TZ=${TIMEZONE:-Asia/Shanghai}
 
 x-db-defaults: &db-defaults
   image: postgres:13
   ports:
-    - "9432:5432"
+    - "${DB_PORT:-9432}:5432"
   networks:
     - listmonk
   environment:
-    - POSTGRES_PASSWORD=listmonk
-    - POSTGRES_USER=listmonk
-    - POSTGRES_DB=listmonk
+    - POSTGRES_PASSWORD=${DB_PASSWORD}
+    - POSTGRES_USER=${DB_USER}
+    - POSTGRES_DB=${DB_NAME}
   restart: unless-stopped
   healthcheck:
     test: ["CMD-SHELL", "pg_isready -U listmonk"]
@@ -43,17 +43,6 @@ services:
       - db
     volumes:
       - ${LISTMON_CONFIG}/config.toml:/listmonk/config.toml
-
-  demo-db:
-    container_name: listmonk_demo_db
-    <<: *db-defaults
-
-  demo-app:
-    <<: *app-defaults
-    container_name: listmonk_demo_app
-    command: [sh, -c, "yes | ./listmonk --install --config config-demo.toml && ./listmonk --config config-demo.toml"]
-    depends_on:
-      - demo-db
 
 networks:
   listmonk:
