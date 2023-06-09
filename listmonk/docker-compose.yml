@@ -32,20 +32,19 @@ services:
     <<: *db-defaults
     container_name: listmonk_db
     volumes:
-      - type: volume
-        source: listmonk-data
-        target: /var/lib/postgresql/data
+      - "/etc/localtime:/etc/localtime"
+      - "${LISTMONK_CONFIG}/listmonk-data:/var/lib/postgresql/data"
 
   app:
     <<: *app-defaults
     container_name: listmonk_app
     depends_on:
       - db
+    command: "./listmonk --static-dir=/listmonk/static"
     volumes:
-      - ${LISTMON_CONFIG}/config.toml:/listmonk/config.toml
+      - "${LISTMONK_CONFIG}/config.toml:/listmonk/config.toml"
+      - "./static:/listmonk/static"
 
 networks:
   listmonk:
 
-volumes:
-  listmonk-data:
