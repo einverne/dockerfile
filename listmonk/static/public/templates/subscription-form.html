@@ -1,0 +1,52 @@
+{{ define "subscription-form" }}
+{{ template "header" . }}
+<section>
+    <h2>{{ L.T "public.subTitle" }}</h2>
+
+    <form method="post" action="" class="form">
+        <div>
+            <p>
+                <label for="email">{{ L.T "subscribers.email" }}</label>
+                <input id="email" name="email" required="true" type="email" placeholder="{{ L.T "subscribers.email" }}" autofocus="true" >
+
+                <input name="nonce" class="nonce" value="" />
+            </p>
+            <p>
+                <label for="name">{{ L.T "public.subName" }}</label>
+                <input id="name" name="name" type="text" placeholder="{{ L.T "public.subName" }}" >
+            </p>
+
+            <ul class="lists">
+                <h2>{{ L.T "globals.terms.lists" }}</h2>
+                {{ range $i, $l := .Data.Lists }}
+                    <li>
+                        <input checked="true" id="l-{{ $l.UUID}}" type="checkbox" name="l" value="{{ $l.UUID }}" >
+                        <label for="l-{{ $l.UUID}}">{{ $l.Name }}</label>
+                        {{ if ne $l.Description "" }}
+                            <p class="description">{{ $l.Description }}</p>
+                        {{ end }}
+                    </li>
+                {{ end }}
+            </ul>
+
+            {{ if .Data.CaptchaKey }}
+                <div class="captcha">
+                    <div class="h-captcha" data-sitekey="{{ .Data.CaptchaKey }}"></div>
+                    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+                </div>
+            {{ end }}
+            <p>
+                <button type="submit" class="button">{{ L.T "public.sub" }}</button>
+
+                {{ if .EnablePublicArchive }}
+                    <p class="right">
+                        <a href="{{ .RootURL }}/archive">{{ L.T "public.archiveTitle" }}</a>
+                    </p>
+                {{ end }}
+            </p>
+        </div>
+    </form>
+</section>
+
+{{ template "footer" .}}
+{{ end }}
