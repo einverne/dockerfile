@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    restart: always
+    ports:
+      - ${PORT:-3000}:3000
+    environment:
+      - MB_JAVA_TIMEZONE=${MB_JAVA_TIMEZONE:-Asia/Shanghai}
