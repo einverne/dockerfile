@@ -3,7 +3,7 @@ version: '3'
 services:
   uptime-kuma:
     container_name: uptime-kuma
-    image: louislam/uptime-kuma
+    image: louislam/uptime-kuma:${VERSION}
     restart: always
     volumes:
       - ${KUMA_DATA}:/app/data
