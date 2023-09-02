@@ -1,0 +1,6 @@
+PUID=1000
+PGID=1000
+TIMEZONE=Asia/Shanghai
+USER=user
+PASS=passwordxyz
+TRANSMISSION_PATH=~/transmission/
