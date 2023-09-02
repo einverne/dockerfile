@@ -1,0 +1,24 @@
+version: "2.1"
+services:
+  transmission:
+    image: lscr.io/linuxserver/transmission:4.0.4
+    container_name: transmission
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+      - TRANSMISSION_WEB_HOME= #optional
+      - USER=${USER}
+      - PASS=${PASS}
+      - WHITELIST= #optional
+      - PEERPORT= #optional
+      - HOST_WHITELIST= #optional
+    volumes:
+      - ${TRANSMISSION_PATH}/data:/config
+      - ${TRANSMISSION_PATH}/downloads:/downloads
+      - ${TRANSMISSION_PATH}/watch:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
