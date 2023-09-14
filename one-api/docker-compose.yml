@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  one-api:
+    container_name: one-api
+    image: justsong/one-api
+    restart: always
+    ports:
+      - '${PORT}:3000'
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - '${ONE_API_DATA}:/data'
