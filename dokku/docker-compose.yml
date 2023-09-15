@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  dokku:
+    container_name: dokku
+    image: 'dokku/dokku:0.31.3'
+    restart: always
+    ports:
+      - '80:80'
+      - '3022:22'
+      - '8080:80'
+      - '8443:443'
+    volumes:
+      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+      - '/var/lib/dokku:/mnt/dokku'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    logging:
+      options:
+        max-size: 1g
+    environment:
+      - DOKKU_HOSTNAME=${DOKKU_HOSTNAME}
+      - DOKKU_HOST_ROOT=${DOKKU_HOST_ROOT}
+      - DOKKU_LIB_HOST_ROOT=${DOKKU_LIB_HOST_ROOT}
