@@ -1,0 +1,17 @@
+listen: :443
+
+acme:
+  domains:
+    - your.domain.com
+  email: test@domain.com
+
+auth:
+  type: password
+  password: $PASSWORD
+
+masquerade:
+  type: proxy
+  proxy:
+    url: https://bing.com
+    rewriteHost: true
+
