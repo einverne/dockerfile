@@ -1,0 +1,6 @@
+MYSQL_DATABASE=photoview
+MYSQL_USER=photoview
+MYSQL_PASSWORD=QpPwpc
+MAPBOX_TOKEN=sk.eyJ
+PATH_TO_PHOTO=~/photoview
+PHOTOVIEW_MYSQL_URL=photoview:QpPwpc@tcp(db)/photoview
