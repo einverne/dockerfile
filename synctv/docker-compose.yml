@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  synctv:
+    image: synctvorg/synctv
+    container_name: synctv
+    restart: always
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - ${PATH_TO_CONFIG}:/root/.synctv
+    ports:
+      - "8080:8080/tcp"
+      - "8080:8080/udp"
