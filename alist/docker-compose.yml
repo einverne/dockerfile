@@ -7,6 +7,12 @@ services:
     volumes:
       - '${ALIST_CONFIG_PATH}:/opt/alist/data'
     container_name: alist
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=022
+    ports:
+      - "5244:5244"
 
 networks:
   default:
