@@ -18,6 +18,8 @@ services:
     image: nextcloud
     container_name: nextcloud_app
     restart: always
+    env_file:
+      - .env
     depends_on:
       - db
     ports:
