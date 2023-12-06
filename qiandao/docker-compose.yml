@@ -5,6 +5,7 @@ services:
     image: a76yyyy/qiandao:latest
     # image: a76yyyy/qiandao:lite-latest
     container_name: qiandao
+    restart: always
     depends_on:
       - redis
     volumes:
@@ -76,6 +77,7 @@ services:
   redis:
     image: redis:alpine
     container_name: redis
+    restart: always
     command: ["--loglevel warning"]
     # command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
