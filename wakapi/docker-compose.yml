@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   muety:
-    image: 'ghcr.io/muety/wakapi:latest'
+    image: 'ghcr.io/muety/wakapi:${VERSION}'
     container_name: wakapi
     restart: always
     #ports:
