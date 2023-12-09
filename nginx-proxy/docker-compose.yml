@@ -4,6 +4,11 @@ services:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5"
+        max-size: "50m"
     ports:
       - "80:80"
       - "443:443"
