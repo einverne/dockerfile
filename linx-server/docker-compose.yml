@@ -1,4 +1,5 @@
 version: "3"
+
 services:
   linx-server:
     image: andreimarcu/linx-server
@@ -6,19 +7,19 @@ services:
     restart: always
     command: -config /data/linx-server.conf
     volumes:
-      - ~/linx/meta:/data/meta
-      - ~/linx/files:/data/files
+      - ${PATH_META}:/data/meta
+      - ${PATH_FILES}:/data/files
       - ./config.conf:/data/linx-server.conf
     environment:
       - TZ=Asia/Shanghai
       - PUID=1000
       - PGID=1000
-      - VIRTUAL_HOST=linx.einverne.info
+      - VIRTUAL_HOST=${DOMAIN}
       - VIRTUAL_PORT=8080
-      - LETSENCRYPT_HOST=linx.einverne.info
-      - LETSENCRYPT_EMAIL=admin@einverne.info
+      - LETSENCRYPT_HOST=${DOMAIN}
+      - LETSENCRYPT_EMAIL=${EMAIL}
 
 networks:
   default:
-    external:
-      name: nginx-proxy
+    external: true
+    name: nginx-proxy
