@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   dashboard:
-    image: ghcr.io/naiba/nezha-dashboard
+    image: ghcr.io/naiba/nezha-dashboard:${VERSION}
     restart: always
     volumes:
       - ~/nezha/data:/dashboard/data
@@ -16,5 +16,5 @@ services:
 
 networks:
   default:
-    external:
-      name: nginx-proxy
+    name: nginx-proxy
+    external: true
