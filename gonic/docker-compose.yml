@@ -1,0 +1,21 @@
+version: "3"
+services:
+  gonic:
+    image: sentriz/gonic:latest
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 4747:80
+    volumes:
+      - ${GONIC_PATH}/data:/data # gonic db etc
+      - ${GONIC_PATH}/music:/music:ro # your music
+      - ${GONIC_PATH}/podcasts:/podcasts # your podcasts
+      - ${GONIC_PATH}/playlists:/playlists # your playlists
+      - ${GONIC_PATH}/cache:/cache # transcode / covers / etc cache dir
+
+    # set the following two sections if you've enabled jukebox
+    group_add:
+      - audio
+    devices:
+      - /dev/snd:/dev/snd
