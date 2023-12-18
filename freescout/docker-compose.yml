@@ -1,0 +1,67 @@
+version: '2'
+
+services:
+  freescout-app:
+    image: tiredofit/freescout
+    container_name: freescout-app
+    ports:
+    - 80:80
+    links:
+    - freescout-db
+    volumes:
+    ### If you want to perform customizations to the source and have access to it, then uncomment this line - This includes modules
+    #- ./data:/www/html
+    ### Or, if you just want to use Stock Freescout and hold onto persistent files like cache and session use this, one or the other.
+    - ./data:/data
+    ### If you want to just keep the original source and add additional modules uncomment this line
+    #- ./modules:/www/html/Modules
+    - ./logs/:/www/logs
+    environment:
+    - CONTAINER_NAME=freescout-app
+    - DB_HOST=freescout-db
+    - DB_NAME=freescout
+    - DB_USER=freescout
+    - DB_PASS=freescout
+
+    - SITE_URL=http://freescout.example.com
+    - ADMIN_EMAIL=admin@admin.com
+    - ADMIN_PASS=freescout
+    - ENABLE_SSL_PROXY=FALSE
+    - DISPLAY_ERRORS=FALSE
+    - TIMEZONE=America/Vancouver
+    restart: always
+
+  freescout-db:
+    image: tiredofit/mariadb
+    container_name: freescout-db
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - ROOT_PASS=password
+      - DB_NAME=freescout
+      - DB_USER=freescout
+      - DB_PASS=freescout
+
+      - CONTAINER_NAME=freescout-db
+    restart: always
+
+  freescout-db-backup:
+    container_name: freescout-db-backup
+    image: tiredofit/db-backup
+    links:
+     - freescout-db
+    volumes:
+      - ./dbbackup:/backup
+    environment:
+      - CONTAINER_NAME=freescout-db-backup
+      - DB_HOST=freescout-db
+      - DB_TYPE=mariadb
+      - DB_NAME=freescout
+      - DB_USER=freescout
+      - DB_PASS=freescout
+      - DB01_BACKUP_INTERVAL=1440
+      - DB01_BACKUP_BEGIN=0000
+      - DB_CLEANUP_TIME=8640
+      - COMPRESSION=BZ
+      - MD5=TRUE
+    restart: always
