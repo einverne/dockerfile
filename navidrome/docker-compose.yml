@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    restart: always
+    ports:
+      - "4533:4533"
+    environment:
+      - ND_ENABLETRANSCODINGCONFIG=true
+      - ND_TRANSCODINGCACHESIZE=0
+      - ND_SCANSCHEDULE=1h
+      - ND_LOGLEVEL=info
+      - ND_SESSIONTIMEOUT=24h
+      - ND_BASEURL=""
+      - ND_LASTFM_APIKEY=${ND_LASTFM_APIKEY}
+      - ND_LASTFM_SECRET=${ND_LASTFM_SECRET}
+    volumes:
+      - "${PATH_TO_NAVIDROME}/data:/data"
+      - "${PATH_TO_NAVIDROME}:/music:ro"
+
