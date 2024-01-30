@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  lyricapi:
+    image: hisatri/lyricapi:latest
+    container_name: lyricapi
+    ports:
+      - 28883:28883
+    environment:
+      - TZ=Asia/Shanghai
+      - API_AUTH=${API_AUTH}
+    volumes:
+      - ${PATH_TO_MUSIC}:/music:ro
+    restart: always
