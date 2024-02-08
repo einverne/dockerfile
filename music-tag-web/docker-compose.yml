@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  music-tag:
+    image: xhongc/music_tag_web:latest
+    container_name: music-tag-web
+    restart: always
+    ports:
+      - "8001:8001"
+    volumes:
+      - ${PATH_TO_MUSIC}:/app/media:rw
+      - ${CONFIG}:/app/data
+    command: /start
