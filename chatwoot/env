@@ -1,3 +1,4 @@
+CHATWOOT_VERSION=v3.6.0
 CHATWOOT_DATA=~/chatwoot_data/
 # Used to verify the integrity of signed cookies. so ensure a secure value is set
 # generate by using command: openssl rand -hex 32
