@@ -4,6 +4,9 @@ services:
     container_name: adguardhome
     image: adguard/adguardhome
     restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -16,7 +19,7 @@ services:
       - "5443:5443/tcp"
       - "5443:5443/udp"
     volumes:
-      - ~/adguardhome/work:/opt/adguardhome/work
-      - ~/adguardhome/conf:/opt/adguardhome/conf
+      - ${ADGUARD_PATH}/work:/opt/adguardhome/work
+      - ${ADGUARD_PATH}/conf:/opt/adguardhome/conf
     environment:
       - TZ=Asia/Shanghai
