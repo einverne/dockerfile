@@ -1,0 +1,6 @@
+# more https://github.com/key-networks/ztncui-aio
+NODE_ENV=production
+HTTP_PORT=3443
+ZTNCUI_PASSWD=
+MYADDR=1.2.3.4
+
