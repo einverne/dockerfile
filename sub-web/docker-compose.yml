@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  subconverter:
+    container_name: subconverter
+    image: tindy2013/subconverter
+    restart: always
+    ports:
+      - 25500:25500
+  subweb:
+    container_name: subweb
+    image: careywong/subweb:latest
+    restart: always
+    ports:
+      - 58080:80
+
