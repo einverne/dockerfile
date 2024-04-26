@@ -8,7 +8,7 @@
 
 ## 官方网站
 
-- <https://filebrowser.github.io/installation/>
+- <https://filebrowser.org/installation>
 
 源码
 
