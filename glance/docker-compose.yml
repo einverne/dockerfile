@@ -1,0 +1,10 @@
+services:
+  glance:
+    image: glanceapp/glance:${VERSION}
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    volumes:
+      - ./glance.yml:/app/glance.yml
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
