@@ -1,15 +1,14 @@
 
-## filebrowser
+# filebrowser
 
-修改 `.env` 配置文件，然后执行：
-
+Modify the `.env` configuration file and run it:
+`
     docker-compose up -d
-
-
-## 官方网站
+`
+## Official site
 
 - <https://filebrowser.org/installation>
 
-源码
+## Source code
 
 - <https://github.com/filebrowser/filebrowser>

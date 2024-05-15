@@ -1,15 +1,13 @@
+# filebrowser
 
-## filebrowser
-
-修改 `.env` 配置文件，然后执行：
-
+`.env` konfigürasyon dosyasını modifiye et ve çalıştır:
+`
     docker-compose up -d
-
-
-## 官方网站
+`
+## Resmi sayfa
 
 - <https://filebrowser.org/installation>
 
-源码
+## Kaynak kodu
 
 - <https://github.com/filebrowser/filebrowser>
