@@ -4,10 +4,10 @@
 `
     docker-compose up -d
 `
-## Official site
+## Resmi sayfa
 
 - <https://filebrowser.org/installation>
 
-## Source code
+## Kaynak kodu
 
 - <https://github.com/filebrowser/filebrowser>
