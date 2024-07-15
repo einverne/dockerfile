@@ -1,9 +1,8 @@
----
-version: '3'
+version: '3.3'
 
 services:
   umami:
-    image: docker.umami.dev/umami-software/umami:mysql-latest
+    image: ghcr.io/umami-software/umami:mysql-latest
     ports:
       - "${PORT}:3000"
     environment:
