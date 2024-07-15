@@ -6,6 +6,9 @@ services:
     restart: always
     volumes:
       - ~/nezha/data:/dashboard/data
+      - ~/nezha/static-custom/static:/dashboard/resource/static/custom:ro
+      - ~/nezha/theme-custom/template:/dashboard/resource/template/theme-custom:ro
+      - ~/nezha/dashboard-custom/template:/dashboard/resource/template/dashboard-custom:ro
     ports:
       - 5555:5555
     environment:
