@@ -1,0 +1,5 @@
+PORT=3000
+VOCECHAT_PATH=~/vocechat
+PUID=1000
+PGID=1000
+URL=https://voce.example.com

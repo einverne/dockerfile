@@ -1,0 +1,15 @@
+services:
+  vocechat-server:
+    image: privoce/vocechat-server:latest
+    container_name: vocechat
+    hostname: vocechat
+    privileged: true
+    restart: always
+    ports:
+      - '${PORT}:3000'
+    volumes:
+      - '${VOCECHAT_PATH}:/home/vocechat-server/data:rw'
+    environment:
+      - 'PUID=${PUID}'
+      - 'PGID=${PGID}'
+    command: ["--network.frontend_url", "${URL}"]
