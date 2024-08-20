@@ -1,0 +1,4 @@
+USERNAME=username
+PASSWORD=password
+SECRET_KEY=randomSecretKey
+PATH_TO_DATA=~/flatnotes
