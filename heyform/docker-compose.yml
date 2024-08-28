@@ -1,0 +1,35 @@
+services:
+  heyform:
+    image: heyform/community-edition:latest
+    restart: always
+    volumes:
+      # Persist uploaded images
+      - ${HEYFORM_DATA}/assets:/app/static/upload
+    depends_on:
+      - mongo
+      - keydb
+    ports:
+      - '9513:8000'
+    environment:
+      APP_HOMEPAGE_URL: http://127.0.0.1:9513
+      SESSION_KEY: key1
+      FORM_ENCRYPTION_KEY: key2
+      MONGO_URI: 'mongodb://mongo:27017/heyform'
+      REDIS_HOST: keydb
+      REDIS_PORT: 6379
+
+  mongo:
+    image: percona/percona-server-mongodb:4.4
+    restart: always
+    volumes:
+      # Persist MongoDB data
+      - ${HEYFORM_DATA}/database:/data/db
+
+  keydb:
+    image: eqalpha/keydb:latest
+    restart: always
+    command: keydb-server --appendonly yes
+    volumes:
+      # Persist KeyDB data
+      - ${HEYFORM_DATA}/keydb:/data
+
