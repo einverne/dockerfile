@@ -1,0 +1,3 @@
+PG_USER=postgres
+# openssl rand -base64 32 | tr -dc 'a-zA-Z0-9' | head -c 32
+PG_PASSWORD=
