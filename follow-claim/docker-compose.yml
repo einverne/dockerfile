@@ -1,0 +1,11 @@
+services:
+  follow-claim:
+    container_name: follow-claim
+    image: missuo/follow-claim:latest
+    restart: always
+    environment:
+      - COOKIE=${COOKIE}
+      # Bark URL (Optional)
+      - BARK_URL=${BARK_URL}
+      # Use UTC Time (UTC 00:05 is 08:05 in China) (Optional, Default: 00:05)
+      - SCHEDULED_TIME=10:05
