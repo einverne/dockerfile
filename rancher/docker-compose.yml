@@ -1,8 +1,7 @@
-version: '3'
 services:
   rancher:
     container_name: rancher
-    image: rancher/rancher
+    image: rancher/rancher:v2.9.2
     restart: always
     privileged: true
     ports:
