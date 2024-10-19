@@ -1,2 +1,3 @@
+VERSION=v3.29.1
 ALIST_CONFIG_PATH=~/alist
 SITE=your.domain.com
