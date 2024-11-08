@@ -1,0 +1,5 @@
+N8N_BASIC_AUTH_USER=user
+N8N_BASIC_AUTH_PASSWORD=random_password
+DB_USER=n8n
+DB_PASSWORD=random_AYNsR
+WEBHOOK_TUNNEL_URL=https://www.example.com/
