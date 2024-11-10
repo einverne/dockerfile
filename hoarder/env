@@ -1,0 +1,4 @@
+HOARDER_VERSION=release
+NEXTAUTH_SECRET=long_random_secret
+MEILI_MASTER_KEY=long_random_master_key
+NEXTAUTH_URL=https://reader.example.com
