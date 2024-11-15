@@ -4,6 +4,8 @@ services:
     container_name: wallabag
     image: wallabag/wallabag
     restart: always
+    ports:
+      - 3124:80
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -20,10 +22,7 @@ services:
       - SYMFONY__ENV__FROM_EMAIL=${FROM_EMAIL}
       - SYMFONY__ENV__DOMAIN_NAME=${DOMAIN_NAME}
       - SYMFONY__ENV__SERVER_NAME=${SERVER_NAME}
-      - VIRTUAL_HOST=${YOUR_DOMAIN}
-      - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
-      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+      - SYMFONY__ENV__FOSUSER_REGISTRATION=false
     volumes:
       - ~/wallabag/images:/var/www/wallabag/web/assets/images
     healthcheck:
@@ -38,9 +37,4 @@ services:
       test: ["CMD", "redis-cli", "ping"]
       interval: 20s
       timeout: 3s
-
-networks:
-  default:
-    external:
-      name: nginx-proxy
 
