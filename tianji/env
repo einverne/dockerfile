@@ -1,0 +1,6 @@
+PORT=12345
+PG_DB=tianji
+PG_USER=tianji
+# openssl rand -base64 32 | tr -dc 'a-zA-Z0-9' | head -c 32
+PG_PASSWORD=
+JWT_SECRET=
