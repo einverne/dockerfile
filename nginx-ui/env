@@ -1,0 +1,2 @@
+NGINX_UI_DATA_PATH=~/nginx_ui
+PORT=8080
