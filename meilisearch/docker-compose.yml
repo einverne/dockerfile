@@ -1,8 +1,6 @@
-version: '3'
-
 services:
   meilisearch:
-    image: getmeili/meilisearch:v1.8.0
+    image: getmeili/meilisearch:v1.12.7
     container_name: meilisearch
     restart: always
     ports:
