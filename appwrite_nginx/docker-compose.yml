@@ -4,7 +4,6 @@ x-logging: &x-logging
     options:
       max-file: '5'
       max-size: '10m'
-version: '3'
 
 services:
   nginx:
@@ -22,7 +21,7 @@ services:
       - appwrite
 
   appwrite:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     container_name: appwrite
     <<: *x-logging
     restart: unless-stopped
@@ -46,6 +45,7 @@ services:
       - _APP_CONSOLE_WHITELIST_ROOT
       - _APP_CONSOLE_WHITELIST_EMAILS
       - _APP_CONSOLE_WHITELIST_IPS
+      - _APP_CONSOLE_HOSTNAMES
       - _APP_SYSTEM_EMAIL_NAME
       - _APP_SYSTEM_EMAIL_ADDRESS
       - _APP_SYSTEM_SECURITY_EMAIL_ADDRESS
@@ -125,7 +125,7 @@ services:
       - _APP_GRAPHQL_MAX_DEPTH
 
   appwrite-realtime:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: realtime
     container_name: appwrite-realtime
     <<: *x-logging
@@ -142,6 +142,8 @@ services:
       - _APP_OPENSSL_KEY_V1
       - _APP_REDIS_HOST
       - _APP_REDIS_PORT
+      - _APP_REDIS_USER
+      - _APP_REDIS_PASS
       - _APP_DB_HOST
       - _APP_DB_PORT
       - _APP_DB_SCHEMA
@@ -152,7 +154,7 @@ services:
       - _APP_LOGGING_CONFIG
 
   appwrite-worker-audits:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: worker-audits
     <<: *x-logging
     container_name: appwrite-worker-audits
@@ -178,7 +180,7 @@ services:
       - _APP_LOGGING_CONFIG
 
   appwrite-worker-webhooks:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: worker-webhooks
     <<: *x-logging
     container_name: appwrite-worker-webhooks
@@ -200,7 +202,7 @@ services:
       - _APP_LOGGING_CONFIG
 
   appwrite-worker-deletes:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: worker-deletes
     <<: *x-logging
     container_name: appwrite-worker-deletes
@@ -255,7 +257,7 @@ services:
       - _APP_EXECUTOR_HOST
 
   appwrite-worker-databases:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: worker-databases
     <<: *x-logging
     container_name: appwrite-worker-databases
@@ -281,7 +283,7 @@ services:
       - _APP_LOGGING_CONFIG
 
   appwrite-worker-builds:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: worker-builds
     <<: *x-logging
     container_name: appwrite-worker-builds
@@ -309,7 +311,7 @@ services:
       - _APP_LOGGING_CONFIG
 
   appwrite-worker-certificates:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: worker-certificates
     <<: *x-logging
     container_name: appwrite-worker-certificates
@@ -341,7 +343,7 @@ services:
       - _APP_LOGGING_CONFIG
 
   appwrite-worker-functions:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: worker-functions
     <<: *x-logging
     container_name: appwrite-worker-functions
@@ -372,7 +374,7 @@ services:
       - DOCKERHUB_PULL_PASSWORD
 
   appwrite-executor:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: executor
     <<: *x-logging
     container_name: appwrite-executor
@@ -430,7 +432,7 @@ services:
       - DOCKERHUB_PULL_PASSWORD
 
   appwrite-worker-mails:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: worker-mails
     <<: *x-logging
     container_name: appwrite-worker-mails
@@ -457,7 +459,7 @@ services:
       - _APP_LOGGING_CONFIG
 
   appwrite-worker-messaging:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: worker-messaging
     <<: *x-logging
     container_name: appwrite-worker-messaging
@@ -478,7 +480,7 @@ services:
       - _APP_LOGGING_CONFIG
 
   appwrite-maintenance:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: maintenance
     <<: *x-logging
     container_name: appwrite-maintenance
@@ -509,7 +511,7 @@ services:
       - _APP_MAINTENANCE_RETENTION_USAGE_HOURLY
 
   appwrite-usage:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: usage
     container_name: appwrite-usage
     <<: *x-logging
@@ -538,7 +540,7 @@ services:
       - _APP_LOGGING_CONFIG
 
   appwrite-schedule:
-    image: appwrite/appwrite:1.2.1
+    image: appwrite/appwrite:${VERSION}
     entrypoint: schedule
     container_name: appwrite-schedule
     <<: *x-logging
@@ -549,10 +551,17 @@ services:
       - redis
     environment:
       - _APP_ENV
+      - _APP_WORKER_PER_CORE
+      - _APP_OPENSSL_KEY_V1
       - _APP_REDIS_HOST
       - _APP_REDIS_PORT
       - _APP_REDIS_USER
       - _APP_REDIS_PASS
+      - _APP_DB_HOST
+      - _APP_DB_PORT
+      - _APP_DB_SCHEMA
+      - _APP_DB_USER
+      - _APP_DB_PASS
 
   mariadb:
     image: mariadb:10.7 # fix issues when upgrading using: mysql_upgrade -u root -p
