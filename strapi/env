@@ -1,0 +1,4 @@
+DB_ROOT_PASSWORD=
+DB_NAME=strapi
+DB_USER=strapi
+DB_PASSWORD=
