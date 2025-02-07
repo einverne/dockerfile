@@ -1,0 +1,7 @@
+POSTGRES_DB=mattermost
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+MM_SQLSETTINGS_DRIVERNAME=postgres
+MM_SQLSETTINGS_DATASOURCE=postgres://username:password@postgres:5432/mattermost?sslmode=disable&connect_timeout=60
+MM_BLEVESETTINGS_INDEXDIR=/mattermost/bleve-indexes
+MM_SERVICESETTINGS_SITEURL=https://mm.example.com
