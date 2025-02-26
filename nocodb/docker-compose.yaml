@@ -1,0 +1,33 @@
+services:
+  nocodb:
+    container_name: nocodb
+    image: nocodb/nocodb:latest
+    depends_on:
+      - db
+    ports:
+      - "${PORT:-8080}:8080"
+    restart: always
+    volumes:
+      - noco_data:/usr/app/data
+    environment:
+      NC_DB: "mysql2://db:3306?u=${DB_USER}&p=${DB_PASSWORD}&d=${DB_NAME}"
+  db:
+    platform: linux/x86_64
+    image: mysql:latest
+    volumes:
+      - db_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  db_data: {}
+  noco_data: {}
