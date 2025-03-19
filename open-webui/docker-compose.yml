@@ -12,5 +12,4 @@ services:
 
 volumes:
   open-webui:
-    external: true
     name: open-webui
