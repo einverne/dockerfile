@@ -1,0 +1,23 @@
+services:
+  moviepilot-v2:
+    stdin_open: true
+    tty: true
+    container_name: moviepilot-v2
+    image: jxxghp/moviepilot-v2:latest
+    hostname: moviepilot-v2
+    restart: always
+    network_mode: host
+    volumes:
+      - ~/media:/media
+      - ~/moviepilot-v2/config:/config
+      - ~/moviepilot-v2/core:/moviepilot/.cache/ms-playwright
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - NGINX_PORT=${NGINX_PORT}
+      - PORT=3001
+      - PUID=1000
+      - PGID=1000
+      - UMASK=000
+      - TZ=Asia/Shanghai
+      - SUPERUSER=admin
+
