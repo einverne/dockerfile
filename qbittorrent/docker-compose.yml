@@ -1,15 +1,15 @@
 ---
-version: "2.1"
 services:
   qbittorrent:
-    image: linuxserver/qbittorrent
+    image: lscr.io/linuxserver/qbittorrent
     container_name: qbittorrent
     restart: unless-stopped
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
       - TZ=Asia/Shanghai
       - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
     volumes:
       - ${QB_CONFIG}:/config
       - ${QB_DATA_PATH}/downloads:/downloads
@@ -18,3 +18,4 @@ services:
       - 49153:49153
       - 49153:49153/udp
       - 8080:8080
+      - 6881:6881/udp
