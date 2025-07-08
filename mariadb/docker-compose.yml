@@ -1,16 +1,37 @@
-version: '3.8'
-
 services:
-  db:
-    image: mariadb
+  mariadb:
+    image: mariadb:11.8.2
+    container_name: mariadb
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      TZ: ${TZ:-Asia/Shanghai}
     volumes:
-      - mariadb-data:/var/lib/mysql
+      - ~/mariadb-data:/var/lib/mysql
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MARIADB_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
 
-volumes:
-  mariadb-data:
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 512M
+    depends_on:
+      - mariadb
 
