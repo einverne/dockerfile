@@ -8,8 +8,10 @@ services:
     ports:
       - 5678:5678
     environment:
-      - TZ=Asia/Shanghai
+      - N8N_HOST=${N8N_HOST}
+      - GENERIC_TIMEZONE=Asia/Shanghai
       - N8N_BASIC_AUTH_ACTIVE=true
+      - NODE_ENV=production
       - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
       - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
       - DB_TYPE=postgresdb
@@ -22,8 +24,9 @@ services:
       - N8N_EDITOR_BASE_URL=${N8N_EDITOR_BASE_URL}
       - WEBHOOK_URL=${WEBHOOK_URL}
       - WEBHOOK_TUNNEL_URL=${WEBHOOK_TUNNEL_URL}
+      - N8N_SECURE_COOKIE=false
   db:
-    image: postgres:12
+    image: postgres:16
     restart: always
     volumes:
       - db-data:/var/lib/postgresql/data
