@@ -1,5 +1,4 @@
 PUID=1000
 PGID=1000
-QB_CONFIG=~/qbittorrent/
-QB_DATA_PATH=~/qbittorrent_data/
+QB_DATA_PATH=~/qbittorrent/
 

@@ -11,7 +11,7 @@ services:
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
     volumes:
-      - ${QB_CONFIG}:/config
+      - ${QB_DATA_PATH}/config:/config
       - ${QB_DATA_PATH}/downloads:/downloads
       - ${QB_DATA_PATH}/watch:/watch
     ports:
