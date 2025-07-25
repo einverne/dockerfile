@@ -9,7 +9,7 @@ services:
       - PGID=${PGID:-1000}
       - TZ=Asia/Shanghai
       - WEBUI_PORT=8080
-      - TORRENTING_PORT=6881
+      - TORRENTING_PORT=49153
     volumes:
       - ${QB_DATA_PATH}/config:/config
       - ${QB_DATA_PATH}/downloads:/downloads
@@ -18,4 +18,4 @@ services:
       - 49153:49153
       - 49153:49153/udp
       - 8080:8080
-      - 6881:6881/udp
+      #- 6881:6881/udp
