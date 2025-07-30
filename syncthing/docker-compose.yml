@@ -12,7 +12,7 @@ services:
       - 21027:21027/udp
     restart: always
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
       - TZ=Asia/Shanghai
 
