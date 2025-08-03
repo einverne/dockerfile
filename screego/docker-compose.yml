@@ -1,0 +1,12 @@
+services:
+  screego:
+    image: ghcr.io/screego/server:1.12.0
+    ports:
+      - 5050:5050
+      - 3478:3478
+      - 50000-50200:50000-50200/udp
+    environment:
+      SCREEGO_EXTERNAL_IP: ${SCREEGO_EXTERNAL_IP}
+      SCREEGO_SECRET: ${SCREEGO_SECRET}
+      SCREEGO_TURN_PORT_RANGE: "50000:50200"
+      SCREEGO_LOG_LEVEL: info

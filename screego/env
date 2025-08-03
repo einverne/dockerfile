@@ -1,0 +1,16 @@
+# A secret which should be unique. Is used for cookie authentication.
+# openssl rand -base64 32 | tr -dc 'a-zA-Z0-9' | head -c 32
+SCREEGO_SECRET=
+# The external ip of the server.
+# When using a dual stack setup define both IPv4 & IPv6 separated by a comma.
+# Execute the following command on the server you want to host Screego
+# to find your external ip.
+#   curl 'https://api.ipify.org'
+# Example:
+#   SCREEGO_EXTERNAL_IP=192.168.178.2,2a01:c22:a87c:e500:2d8:61ff:fec7:f92a
+#
+# If the server doesn't have a static ip, the ip can be obtained via a domain:
+#   SCREEGO_EXTERNAL_IP=dns:app.screego.net
+# You can also specify the dns server to use
+#   SCREEGO_EXTERNAL_IP=dns:app.screego.net@9.9.9.9:53
+SCREEGO_EXTERNAL_IP=
