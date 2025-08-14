@@ -1,0 +1,94 @@
+MYSQL_ROOT_PASSWORD=
+# 数据库配置
+DATABASE_TYPE=mysql
+#SQLITE_DATABASE=default_db
+MYSQL_HOST=gemini-balance-mysql
+#MYSQL_SOCKET=/run/mysqld/mysqld.sock
+MYSQL_PORT=3306
+MYSQL_USER=gemini
+MYSQL_PASSWORD=
+MYSQL_DATABASE=gemini-balance
+API_KEYS=["AI*************************************","AI*************************************"]
+ALLOWED_TOKENS=[""]
+AUTH_TOKEN=
+# For Vertex AI Platform API Keys
+VERTEX_API_KEYS=["AQ.Abxxxxxxxxxxxxxxxxxxx"]
+# For Vertex AI Platform Express API Base URL
+VERTEX_EXPRESS_BASE_URL=https://aiplatform.googleapis.com/v1beta1/publishers/google
+TEST_MODEL=gemini-1.5-flash
+THINKING_MODELS=["gemini-2.5-flash-preview-04-17"]
+THINKING_BUDGET_MAP={"gemini-2.5-flash-preview-04-17": 4000}
+IMAGE_MODELS=["gemini-2.0-flash-exp"]
+SEARCH_MODELS=["gemini-2.0-flash-exp","gemini-2.0-pro-exp"]
+FILTERED_MODELS=["gemini-1.0-pro-vision-latest", "gemini-pro-vision", "chat-bison-001", "text-bison-001", "embedding-gecko-001"]
+# 是否启用网址上下文，默认启用
+URL_CONTEXT_ENABLED=false
+URL_CONTEXT_MODELS=["gemini-2.5-pro","gemini-2.5-flash","gemini-2.5-flash-lite","gemini-2.0-flash","gemini-2.0-flash-live-001"]
+TOOLS_CODE_EXECUTION_ENABLED=false
+SHOW_SEARCH_LINK=true
+SHOW_THINKING_PROCESS=true
+BASE_URL=https://generativelanguage.googleapis.com/v1beta
+MAX_FAILURES=10
+MAX_RETRIES=3
+CHECK_INTERVAL_HOURS=1
+TIMEZONE=Asia/Shanghai
+# 请求超时时间（秒）
+TIME_OUT=300
+# 代理服务器配置 (支持 http 和 socks5)
+# 示例: PROXIES=["http://user:pass@host:port", "socks5://host:port"]
+PROXIES=[]
+# 对同一个API_KEY使用代理列表中固定的IP策略
+PROXIES_USE_CONSISTENCY_HASH_BY_API_KEY=true
+#########################image_generate 相关配置###########################
+PAID_KEY=AIzaSyxxxxxxxxxxxxxxxxxxx
+CREATE_IMAGE_MODEL=imagen-3.0-generate-002
+UPLOAD_PROVIDER=smms
+SMMS_SECRET_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+PICGO_API_KEY=xxxx
+CLOUDFLARE_IMGBED_URL=https://xxxxxxx.pages.dev/upload
+CLOUDFLARE_IMGBED_AUTH_CODE=xxxxxxxxx
+CLOUDFLARE_IMGBED_UPLOAD_FOLDER=
+##########################################################################
+#########################stream_optimizer 相关配置########################
+STREAM_OPTIMIZER_ENABLED=false
+STREAM_MIN_DELAY=0.016
+STREAM_MAX_DELAY=0.024
+STREAM_SHORT_TEXT_THRESHOLD=10
+STREAM_LONG_TEXT_THRESHOLD=50
+STREAM_CHUNK_SIZE=5
+##########################################################################
+######################### 日志配置 #######################################
+# 日志级别 (debug, info, warning, error, critical)，默认为 info
+LOG_LEVEL=info
+# 是否开启自动删除错误日志
+AUTO_DELETE_ERROR_LOGS_ENABLED=true
+# 自动删除多少天前的错误日志 (1, 7, 30)
+AUTO_DELETE_ERROR_LOGS_DAYS=7
+# 是否开启自动删除请求日志
+AUTO_DELETE_REQUEST_LOGS_ENABLED=false
+# 自动删除多少天前的请求日志 (1, 7, 30)
+AUTO_DELETE_REQUEST_LOGS_DAYS=30
+##########################################################################
+
+# 假流式配置 (Fake Streaming Configuration)
+# 是否启用假流式输出
+FAKE_STREAM_ENABLED=True
+# 假流式发送空数据的间隔时间（秒）
+FAKE_STREAM_EMPTY_DATA_INTERVAL_SECONDS=5
+
+# 安全设置 (JSON 字符串格式)
+# 注意：这里的示例值可能需要根据实际模型支持情况调整
+SAFETY_SETTINGS=[{"category": "HARM_CATEGORY_HARASSMENT", "threshold": "OFF"}, {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "OFF"}, {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "OFF"}, {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "OFF"}, {"category": "HARM_CATEGORY_CIVIC_INTEGRITY", "threshold": "BLOCK_NONE"}]
+URL_NORMALIZATION_ENABLED=false
+# tts配置
+TTS_MODEL=gemini-2.5-flash-preview-tts
+TTS_VOICE_NAME=Zephyr
+TTS_SPEED=normal
+#########################Files API 相关配置########################
+# 是否启用文件过期自动清理
+FILES_CLEANUP_ENABLED=true
+# 文件过期清理间隔（小时）
+FILES_CLEANUP_INTERVAL_HOURS=1
+# 是否启用用户文件隔离（每个用户只能看到自己上传的文件）
+FILES_USER_ISOLATION_ENABLED=true
+##########################################################################
