@@ -1,0 +1,11 @@
+services:
+  krillin:
+    image: asteria798/krillinai
+    ports:
+      - "8888:8888"
+    volumes:
+      - ${KRILLINAI_PATH}/config.toml:/app/config/config.toml
+      - ${KRILLINAI_PATH}/tasks:/app/tasks
+      - ${KRILLINAI_PATH}/models:/app/models
+      - ${KRILLINAI_PATH}/bin:/app/bin
+
