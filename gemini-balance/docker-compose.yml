@@ -1,6 +1,6 @@
 services:
   gemini-balance:
-    image: ghcr.io/snailyp/gemini-balance:latest
+    image: ghcr.io/snailyp/gemini-balance:2.2.2
     container_name: gemini-balance
     restart: always
     ports:
