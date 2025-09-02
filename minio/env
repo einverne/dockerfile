@@ -1,0 +1,6 @@
+MINIO_DATA_PATH=~/minio/data
+MINIO_CONFIG=~/minio/config
+YOUR_DOMAIN=
+YOUR_EMAIL=
+USER=
+PASSWORD=
