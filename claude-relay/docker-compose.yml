@@ -1,0 +1,77 @@
+services:
+  claude-relay:
+    build: .
+    image: weishaw/claude-relay-service:latest
+    restart: always
+    ports:
+      - "${BIND_HOST:-0.0.0.0}:${PORT:-3000}:3000"
+    volumes:
+      - ${CLAUDE_RELAY_PATH}/logs:/app/logs
+      - ${CLAUDE_RELAY_PATH}/data:/app/data
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=${JWT_SECRET}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - ADMIN_SESSION_TIMEOUT=${ADMIN_SESSION_TIMEOUT:-86400000}
+      - API_KEY_PREFIX=${API_KEY_PREFIX:-cr_}
+
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
+
+      - DEFAULT_PROXY_TIMEOUT=${DEFAULT_PROXY_TIMEOUT:-60000}
+      - MAX_PROXY_RETRIES=${MAX_PROXY_RETRIES:-3}
+
+      - DEFAULT_TOKEN_LIMIT=${DEFAULT_TOKEN_LIMIT:-1000000}
+
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_MAX_SIZE=${LOG_MAX_SIZE:-10m}
+      - LOG_MAX_FILES=${LOG_MAX_FILES:-5}
+
+      - CLEANUP_INTERVAL=${CLEANUP_INTERVAL:-3600000}
+      - TOKEN_USAGE_RETENTION=${TOKEN_USAGE_RETENTION:-2592000000}
+      - HEALTH_CHECK_INTERVAL=${HEALTH_CHECK_INTERVAL:-60000}
+      - TIMEZONE_OFFSET=${TIMEZONE_OFFSET:-8}
+
+      - DEBUG=${DEBUG:-false}
+      - ENABLE_CORS=${ENABLE_CORS:-true}
+      - TRUST_PROXY=${TRUST_PROXY:-true}
+    depends_on:
+      - redis
+    networks:
+      - claude-relay-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    expose:
+      - "6379"
+    volumes:
+      - ${CLAUDE_RELAY_PATH}/redis_data:/data
+    command: redis-server --save 60 1 --appendonly yes --appendfsync everysec
+    networks:
+      - claude-relay-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+networks:
+  claude-relay-network:
+    driver: bridge
