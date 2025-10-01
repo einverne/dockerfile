@@ -10,6 +10,8 @@ services:
     environment:
       - N8N_HOST=${N8N_HOST}
       - GENERIC_TIMEZONE=Asia/Shanghai
+      - NODE_ENV=production
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
       - N8N_BASIC_AUTH_ACTIVE=true
       - NODE_ENV=production
       - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
@@ -25,6 +27,7 @@ services:
       - WEBHOOK_URL=${WEBHOOK_URL}
       - WEBHOOK_TUNNEL_URL=${WEBHOOK_TUNNEL_URL}
       - N8N_SECURE_COOKIE=false
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
   db:
     image: postgres:16
     restart: always
