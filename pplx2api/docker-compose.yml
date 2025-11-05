@@ -1,0 +1,16 @@
+services:
+  pplx2api:
+    image: ghcr.io/yushangxiao/pplx2api:latest
+    container_name: pplx
+    ports:
+      - "8080:8080"
+    environment:
+      - SESSIONS=${SESSIONS}
+      - ADDRESS=0.0.0.0:8080
+      - APIKEY=${APIKEY}
+      #- PROXY=http://proxy:2080  # 可选
+      - MAX_CHAT_HISTORY_LENGTH=10000
+      - NO_ROLE_PREFIX=false
+      - IS_INCOGNITO=true
+      - SEARCH_RESULT_COMPATIBLE=false
+    restart: unless-stopped
