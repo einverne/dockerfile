@@ -1,16 +1,11 @@
-version: "3"
-
 services:
   gogs:
-    image: gogs/gogs:0.12.9
+    image: gogs/gogs:0.13.3
     container_name: gogs
     restart: always
     volumes:
       - ${GOGS_DATA_PATH}:/data
     ports:
       - "${SSH_PORT}:22"
+      - "8080:3000"
 
-networks:
-  default:
-    external: true
-    name: nginx-proxy
