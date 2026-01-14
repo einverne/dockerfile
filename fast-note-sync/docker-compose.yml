@@ -1,0 +1,14 @@
+version: '3'
+services:
+  fast-note-sync-service:
+    image: haierkeys/fast-note-sync-service:latest
+    container_name: fast-note-sync-service
+    restart: always
+    ports:
+      - "9000:9000"  # API Port
+      - "9001:9001"  # WebSocket Port
+    volumes:
+      - ${FAST_NOTE_SYNC}/storage:/fast-note-sync/storage  # Data storage
+      - ${FAST_NOTE_SYNC}/config:/fast-note-sync/config    # Configuration files
+    env_file:
+      - .env
