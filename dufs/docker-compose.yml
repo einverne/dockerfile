@@ -1,0 +1,13 @@
+services:
+  dufs:
+    container_name: dufs
+    image: sigoden/dufs:latest
+    restart: always
+    ports:
+      - "${DUFS_PORT}:5000"
+    volumes:
+      - ${DUFS_PATH}:/data:rw
+    command: >
+      /data --allow-all
+      -a '${DUFS_USER}:${PASSWORD_HASH}/@/:rw'
+
