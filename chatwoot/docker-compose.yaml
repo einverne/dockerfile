@@ -33,7 +33,7 @@ services:
     command: ['bundle', 'exec', 'sidekiq', '-C', 'config/sidekiq.yml']
 
   postgres:
-    image: postgres:12
+    image: pgvector/pgvector:pg12
     restart: always
     ports:
       - '0.0.0.0:5432:5432'
