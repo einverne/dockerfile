@@ -15,7 +15,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
   nextcloud:
-    image: nextcloud
+    image: nextcloud:33
     container_name: nextcloud_app
     restart: always
     env_file:
