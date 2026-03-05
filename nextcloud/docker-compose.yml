@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   db:
     image: mariadb:10.6
@@ -14,6 +12,12 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
+  redis:
+    image: redis:7-alpine
+    container_name: nextcloud_redis
+    restart: always
+    command: redis-server --requirepass ${REDIS_HOST_PASSWORD}
+
   nextcloud:
     image: nextcloud:33
     container_name: nextcloud_app
@@ -22,6 +26,7 @@ services:
       - .env
     depends_on:
       - db
+      - redis
     ports:
       - 8081:80
     volumes:
@@ -31,3 +36,6 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - REDIS_HOST=redis
+      - REDIS_HOST_PORT=6379
+      - REDIS_HOST_PASSWORD=${REDIS_HOST_PASSWORD}
