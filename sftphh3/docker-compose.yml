@@ -1,0 +1,13 @@
+version: '3'
+services:
+  sftp:
+    container_name: sftp
+    image: atmoz/sftp
+    restart: always
+    volumes:
+      - ${DATA_PATH}:/home/einverne/
+      - ${CONFIG_PATH}/users.conf:/etc/sftp/users.conf:ro
+    ports:
+      - "2222:22"
+    environment:
+      - TZ=Asia/Shanghai
