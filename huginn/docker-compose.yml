@@ -1,15 +1,19 @@
-version: "3"
 services:
   huginn:
-    image: ghcr.io/huginn/huginn
+    image: ghcr.io/huginn/huginn@sha256:d4e3dc0193e2716a077d0e53f59c999e3a62171dfbf5f7976d9f32456371eafc
     container_name: huginn
     restart: always
     ports:
-      - 3000:3000
+      - "3000:3000"
     environment:
-      HUGINN_DATABASE_ADAPTER: mysql2
-      MYSQL_PORT_3306_TCP_ADDR: ${MYSQL_PORT_3306_TCP_ADDR}
-      MYSQL_PORT_3306_TCP_PORT: 3306
-      MYSQL_DATABASE: huginn
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      - HUGINN_DATABASE_ADAPTER=mysql2
+      - MYSQL_PORT_3306_TCP_ADDR=${MYSQL_HOST}
+      - MYSQL_PORT_3306_TCP_PORT=${MYSQL_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - DATABASE_USERNAME=${MYSQL_USERNAME}
+      - DATABASE_PASSWORD=${MYSQL_PASSWORD}
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
