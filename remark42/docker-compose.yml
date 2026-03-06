@@ -1,19 +1,16 @@
-version: "3"
-
 services:
   remark42:
     image: umputun/remark42:latest
-    container_name: "remark42"
-    restart: always
-
+    container_name: remark42
+    restart: unless-stopped
     logging:
       driver: json-file
       options:
         max-size: "10m"
         max-file: "5"
+    ports:
+      - "8042:8080"
     environment:
-      - PUID=1000
-      - PGID=1000
       - REMARK_URL=${URL}
       - SITE=${SITE}
       - SECRET=${SECRET}
@@ -33,20 +30,11 @@ services:
       - SMTP_TLS=${SMTP_TLS}
       - SMTP_USERNAME=${SMTP_USERNAME}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
-      - VIRTUAL_HOST=${YOUR_DOMAIN}
       - NOTIFY_ADMINS=email
       - NOTIFY_EMAIL_FROM=${NOTIFY_EMAIL_FROM}
       - ADMIN_SHARED_EMAIL=${ADMIN_SHARED_EMAIL}
       - NOTIFY_USERS=email
       - AUTH_EMAIL_ENABLE=true
       - AUTH_EMAIL_FROM=${AUTH_EMAIL_FROM}
-      - VIRTUAL_PORT=8080
-      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
-      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
     volumes:
       - ${STORAGE_PATH}:/srv/var
-
-networks:
-  default:
-    external:
-      name: nginx-proxy

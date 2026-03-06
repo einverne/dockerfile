@@ -1,23 +1,13 @@
-version: '3.3'
-
 services:
   freshrss:
-    image: linuxserver/freshrss
+    image: linuxserver/freshrss:1.28.1
     container_name: freshrss
+    ports:
+      - "8070:80"
     volumes:
-      - '~/freshrss:/config'
+      - ~/freshrss:/config
     restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Shanghai
-      - VIRTUAL_HOST=${YOUR_DOMAIN}
-      - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
-      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
-
-networks:
-  default:
-    external:
-      name: nginx-proxy
-
