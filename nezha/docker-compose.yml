@@ -1,21 +1,17 @@
-version: "3.3"
-
 services:
   dashboard:
-    image: ghcr.io/naiba/nezha-dashboard:${VERSION}
+    image: ghcr.io/nezhahq/nezha:latest
+    container_name: nezha-dashboard
     restart: always
     volumes:
-      - ~/nezha/data:/dashboard/data
-      - ~/nezha/static-custom/static:/dashboard/resource/static/custom:ro
-      - ~/nezha/theme-custom/template:/dashboard/resource/template/theme-custom:ro
-      - ~/nezha/dashboard-custom/template:/dashboard/resource/template/dashboard-custom:ro
+      - ./data:/dashboard/data
     ports:
-      - 5555:5555
+      - 5555:8008
     environment:
-      - VIRTUAL_HOST=${YOUR_DOMAIN}
-      - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=${YOUR_DOMAIN}
-      - LETSENCRYPT_EMAIL=${YOUR_EMAIL}
+      - VIRTUAL_HOST=nz.einverne.info
+      - VIRTUAL_PORT=8008
+      - LETSENCRYPT_HOST=nz.einverne.info
+      - LETSENCRYPT_EMAIL=admin@einverne.info
 
 networks:
   default:
