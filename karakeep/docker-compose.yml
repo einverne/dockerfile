@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   web:
     image: ghcr.io/karakeep-app/karakeep:${HOARDER_VERSION:-release}
@@ -36,4 +35,8 @@ services:
 
 volumes:
   meilisearch:
+    name: hoarder_meilisearch
+    external: true
   data:
+    name: hoarder_data
+    external: true
