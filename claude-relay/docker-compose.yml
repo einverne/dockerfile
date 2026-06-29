@@ -1,7 +1,7 @@
 services:
   claude-relay:
     build: .
-    image: weishaw/claude-relay-service:v1.1.306
+    image: weishaw/claude-relay-service:v1.1.308
     restart: always
     ports:
       - "${BIND_HOST:-0.0.0.0}:${PORT:-3000}:3000"
