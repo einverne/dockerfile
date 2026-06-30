@@ -1,0 +1,6 @@
+services:
+  yesplaymusic:
+    container_name: yesplaymusic
+    image: fogforest/yesplaymusic
+    ports:
+        - 3000:80
