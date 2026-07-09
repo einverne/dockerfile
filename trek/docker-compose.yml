@@ -1,0 +1,11 @@
+services:
+  trek:
+    image: mauriceboe/trek
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+    volumes:
+      - ${TREK_PATH}/data:/app/data
+      - ${TREK_PATH}/uploads:/app/uploads
