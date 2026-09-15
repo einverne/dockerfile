@@ -1,0 +1,43 @@
+services:
+  musicpilot:
+    image: ghcr.io/lzcer/musicpilot:latest
+    environment:
+      TZ: Asia/Shanghai
+      MP_APP_NAME: MusicPilot
+      MP_LOG_LEVEL: INFO
+      MP_ADMIN_USERNAME: ${MP_ADMIN_USERNAME}
+      MP_ADMIN_PASSWORD: ${MP_ADMIN_PASSWORD}
+      MP_SESSION_SECRET: ${MP_SESSION_SECRET}
+      MP_DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      MP_STATIC_DIR: /app/frontend/dist
+      MP_INDEXER_PARSER_CONFIG: /config/sites.parser.yaml
+      MP_RUNTIME_CONFIG: /config/runtime.json
+      MP_MUSICBRAINZ_USER_AGENT: MusicPilot/1.0.0 (self-hosted)
+      MP_WRITE_AUDIO_TAGS: "true"
+      MP_SUBSCRIPTIONS_ENABLED: "true"
+      MP_SUBSCRIPTION_CHECK_INTERVAL_MINUTES: "1440"
+    restart: unless-stopped
+    ports:
+      - ${PORT}:8000
+    volumes:
+      - ${MUSIC_PILOT_PATH}/data:/data
+      - ${MUSIC_PILOT_PATH}/config:/config
+      - ${MUSIC_PILOT_MEDIA_PATH}/:/media
+    depends_on:
+      postgres:
+        condition: service_healthy
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      TZ: Asia/Shanghai
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ${MUSIC_PILOT_PATH}/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
