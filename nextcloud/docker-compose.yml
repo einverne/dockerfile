@@ -1,6 +1,6 @@
 services:
   db:
-    image: mariadb:10.6
+    image: mariadb@sha256:4c3275637f1327ca41c54dff174e5430ec825a92ccb60dc11feecaa5f7d1bfd0  # == mariadb:10.6 as of nc1 (10.6.25)
     container_name: nextcloud_db
     restart: always
     volumes:
@@ -13,13 +13,13 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
   redis:
-    image: redis:7-alpine
+    image: redis@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08  # == redis:7-alpine as of nc1
     container_name: nextcloud_redis
     restart: always
     command: redis-server --requirepass ${REDIS_HOST_PASSWORD}
 
   nextcloud:
-    image: nextcloud:33
+    image: nextcloud@sha256:63e74e341d302e94d52a4ee1cf5bdc7ee94c04c3c661823c5e5a5270741310e8  # == nextcloud:33.0.9
     container_name: nextcloud_app
     restart: always
     env_file:
@@ -28,9 +28,10 @@ services:
       - db
       - redis
     ports:
-      - 8081:80
+      - 8086:80
     volumes:
       - ${NEXTCLOUD_DATA}:/var/www/html
+      - ./apache-vhost.conf:/etc/apache2/sites-available/000-default.conf:ro
     environment:
       - MYSQL_HOST=db
       - MYSQL_DATABASE=${MYSQL_DATABASE}
