@@ -1,0 +1,7 @@
+# 复制为 .env 后按需修改：cp env .env
+# 镜像标签，固定版本见 https://hub.docker.com/r/linzixuanzz/daidai-panel/tags
+# Alpine 精简版：3.3.7；完整版：3.3.7-full；Debian 版：3.3.7-debian
+VERSION=3.3.7
+
+# 面板数据目录（数据库、脚本、依赖、日志、备份），留空默认 ~/daidai-panel
+DAIDAI_DATA_PATH=~/daidai-panel

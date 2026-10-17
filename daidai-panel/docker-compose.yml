@@ -1,0 +1,16 @@
+name: daidai-panel
+
+# https://github.com/linzixuanzz/daidai-panel
+# 不使用 Watchtower，镜像版本由 .env 中的 VERSION 控制
+# 升级：修改 .env 中的 VERSION 后执行 docker compose pull && docker compose up -d
+services:
+  daidai-panel:
+    image: linzixuanzz/daidai-panel:${VERSION:?请在 .env 中设置 VERSION}
+    container_name: daidai-panel
+    restart: unless-stopped
+    ports:
+      - "5700:5700"
+    volumes:
+      - ${DAIDAI_DATA_PATH:-${HOME}/daidai-panel}:/app/Dumb-Panel
+    environment:
+      - TZ=Asia/Tokyo
