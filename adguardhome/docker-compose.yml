@@ -1,7 +1,7 @@
 services:
   adguardhome:
     container_name: adguardhome
-    image: adguard/adguardhome
+    image: adguard/adguardhome:v0.107.79
     restart: always
     environment:
       - TZ=Asia/Shanghai
