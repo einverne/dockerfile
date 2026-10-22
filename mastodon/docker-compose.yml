@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   db:
     restart: always
@@ -15,7 +13,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ~/mastodon/postgresql/data:/var/lib/postgresql/data
+      - /home/einverne/mastodon/postgresql/data:/var/lib/postgresql/data
     env_file: .env.production
     environment:
       - "POSTGRES_DB=mastodon"
@@ -29,7 +27,7 @@ services:
 
   redis:
     restart: always
-    image: redis:6-alpine
+    image: redis:7-alpine
     networks:
       - internal_network
       - mastodon_networks
@@ -40,7 +38,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ~/mastodon/redis/data:/data
+      - /home/einverne/mastodon/redis/data:/data
     logging:
       driver: "json-file"
       options:
@@ -64,7 +62,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ~/mastodon/es/data:/usr/share/elasticsearch/data:rw
+      - /home/einverne/mastodon/es/data:/usr/share/elasticsearch/data:rw
     ulimits:
       memlock:
         soft: -1
@@ -73,55 +71,58 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+
   web:
-    image: tootsuite/mastodon:v4.2.26
+    image: ghcr.io/mastodon/mastodon:${MASTODON_VERSION}
     restart: always
     env_file: .env.production
     environment:
       - "RAILS_ENV=production"
-    command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000"
+    command: bundle exec puma -C config/puma.rb
     healthcheck:
-     test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:3000/health || exit 1"]
-     interval: 15s
-     retries: 12
+      test: ["CMD-SHELL", "curl -s --noproxy localhost localhost:3000/health | grep -q 'OK' || exit 1"]
+      interval: 15s
+      retries: 12
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ~/mastodon/public/system:/mastodon/public/system
+      - /home/einverne/mastodon/public/system:/mastodon/public/system
     networks:
       - internal_network
       - mastodon_networks
     ports:
-      - "127.0.0.1:3000:3000"
+      # nc1: host 3000 is taken by myaltbox; reached by gc3 NPM, filtered in DOCKER-USER
+      - "3001:3000"
     depends_on:
       - db
       - redis
+
   streaming:
-    image: tootsuite/mastodon:v4.2.26
+    image: ghcr.io/mastodon/mastodon-streaming:${MASTODON_VERSION}
     env_file: .env.production
     restart: always
-    command: node ./streaming
+    command: node ./streaming/index.js
     networks:
       - internal_network
       - mastodon_networks
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:4000/api/v1/streaming/health || exit 1"]
+      test: ["CMD-SHELL", "curl -s --noproxy localhost localhost:4000/api/v1/streaming/health | grep -q 'OK' || exit 1"]
       interval: 15s
       retries: 12
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     environment:
-      - "STREAMING_CLUSTER_NUM=1"
       - "NODE_ENV=production"
     ports:
-      - "127.0.0.1:4000:4000"
+      # reached by gc3 NPM (/api/v1/streaming), filtered in DOCKER-USER
+      - "4000:4000"
     depends_on:
       - db
       - redis
 
   sidekiq:
-    image: tootsuite/mastodon:v4.2.26
+    image: ghcr.io/mastodon/mastodon:${MASTODON_VERSION}
     environment:
       - "RAILS_ENV=production"
     env_file: .env.production
@@ -133,7 +134,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ~/mastodon/public/system:/mastodon/public/system
+      - /home/einverne/mastodon/public/system:/mastodon/public/system
     depends_on:
       - db
       - redis
