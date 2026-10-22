@@ -290,7 +290,7 @@ services:
 
   # The Weaviate vector store.
   weaviate:
-    image: semitechnologies/weaviate:1.19.0
+    image: semitechnologies/weaviate:1.39.13
     restart: always
     volumes:
       # Mount the Weaviate data directory to the container.
