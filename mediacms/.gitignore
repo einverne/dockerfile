@@ -1,0 +1,3 @@
+# real values live in .env (ignored by the repo-wide .gitignore)
+# self-signed sample cert/key from upstream, not used by this compose
+deploy/docker/reverse_proxy/certs/

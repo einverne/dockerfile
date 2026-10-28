@@ -1,0 +1,9 @@
+# Copy to .env and fill in the blanks: cp env .env
+TZ=Asia/Shanghai
+POSTGRES_DB=mediacms
+POSTGRES_USER=mediacms
+POSTGRES_PASSWORD=
+ADMIN_USER=admin
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
+PORT=8084
