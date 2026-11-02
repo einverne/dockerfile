@@ -1,0 +1,31 @@
+# PowerContext Server，从官方 tag 源码构建（上游暂未发布 Docker Hub 镜像）
+# src/ 是 git submodule，指向 oceanbase/powercontext，固定在发布 tag 对应的 commit
+# 新机器：git submodule update --init --depth 1 powercontext/src
+# 升级：git -C src fetch --depth 1 origin tag powercontext-vX.Y.Z && git -C src checkout powercontext-vX.Y.Z
+#       修改 .env 的 PC_VERSION，然后 docker compose up -d --build，最后在父仓库提交 src 的新指针
+services:
+  powercontext:
+    build:
+      context: ./src
+      dockerfile: docker/Dockerfile
+      args:
+        POWERCONTEXT_VERSION: ${PC_VERSION:-1.4.1}
+    image: powercontext-server:${PC_VERSION:-1.4.1}
+    container_name: powercontext
+    restart: unless-stopped
+    ports:
+      - "${BIND_HOST:-127.0.0.1}:${PC_PORT:-18000}:8000"
+    env_file:
+      - path: .env
+        required: true
+    volumes:
+      # 镜像以 10001:10001 运行，目录需同 UID 所有
+      - "${PC_DATA_PATH:-/home/einverne/powercontext-data}:/data"
+
+# 固定子网，使网关 IP 稳定为 172.31.0.1（.env 里的 FORWARDED_ALLOW_IPS 依赖它）
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.31.0.0/16
+          gateway: 172.31.0.1

@@ -25,3 +25,7 @@
 [submodule "docker-rutorrent"]
 	path = docker-rutorrent
 	url = https://github.com/einverne/docker-rutorrent
+[submodule "powercontext"]
+	path = powercontext/src
+	url = https://github.com/oceanbase/powercontext.git
+	shallow = true
