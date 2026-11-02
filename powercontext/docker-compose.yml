@@ -20,7 +20,7 @@ services:
         required: true
     volumes:
       # 镜像以 10001:10001 运行，目录需同 UID 所有
-      - "${PC_DATA_PATH:-/home/einverne/powercontext-data}:/data"
+      - "${PC_DATA_PATH:-./data}:/data"
 
 # 固定子网，使网关 IP 稳定为 172.31.0.1（.env 里的 FORWARDED_ALLOW_IPS 依赖它）
 networks:

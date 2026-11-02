@@ -2,3 +2,6 @@
 .env
 .env.*
 *.bak-*
+
+# compose 默认数据目录（PC_DATA_PATH 未设置时）
+data/
