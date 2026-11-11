@@ -16,12 +16,12 @@ version: '3.4' # For compatibility with older Docker versions
 
 services:
   new-api:
-    image: calciumion/new-api:v1.0.0-rc.24
+    image: calciumion/new-api:v1.0.0-rc.49
     container_name: new-api
     restart: always
     command: --log-dir /app/logs
     ports:
-      - "3020:3000"
+      - "127.0.0.1:3020:3000"
     volumes:
       - ${NEW_API_PATH}/data:/data
       - ${NEW_API_PATH}/logs:/app/logs
@@ -37,6 +37,9 @@ services:
 #      - STREAMING_TIMEOUT=300  # 流模式无响应超时时间，单位秒，默认120秒，如果出现空补全可以尝试改为更大值 （Streaming timeout in seconds, default is 120s. Increase if experiencing empty completions）
       - SESSION_SECRET=${SESSION_SECRET}  # 多机部署时设置，必须修改这个随机字符串！！ （multi-node deployment, set this to a random string!!!!!!!）
       - GENERATE_DEFAULT_TOKEN=false
+      - DEFAULT_LANGUAGE=zh-CN
+      - SESSION_COOKIE_SECURE=true
+      - SESSION_COOKIE_TRUSTED_URL=${FRONTEND_BASE_URL}
 #      - SYNC_FREQUENCY=60  # Uncomment if regular database syncing is needed
 #      - GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX  # Google Analytics 的测量 ID (Google Analytics Measurement ID)
 #      - UMAMI_WEBSITE_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx  # Umami 网站 ID (Umami Website ID)
