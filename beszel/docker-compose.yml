@@ -1,0 +1,41 @@
+# Beszel 轻量服务器监控：Hub（Web 面板）+ 本机 Agent
+# 所有 Agent 都用 WebSocket 主动连 Hub（HUB_URL + 通用 TOKEN），Hub 不再 SSH 到 Agent，
+# 所以 Agent 不需要开放任何入站端口。详见 README.md。
+services:
+  beszel:
+    image: henrygd/beszel:${BESZEL_VERSION:-0.21.1}
+    container_name: beszel
+    restart: unless-stopped
+    # 只绑 loopback，外部访问走 Cloudflare Tunnel
+    ports:
+      - "${BIND_HOST:-127.0.0.1}:${BESZEL_PORT:-8090}:8090"
+    environment:
+      APP_URL: ${APP_URL:-http://localhost:8090}
+      # 只接受 Agent 的 WebSocket 连接，不主动 SSH
+      DISABLE_SSH: "true"
+      # 仅在全新安装时创建首个管理员，创建后可从 .env 删除
+      USER_EMAIL: ${USER_EMAIL:-}
+      USER_PASSWORD: ${USER_PASSWORD:-}
+    volumes:
+      - "${BESZEL_DATA_PATH:-./beszel_data}:/beszel_data"
+
+  # 监控 Hub 所在宿主机本身。host 网络才能拿到真实网卡流量，
+  # 同时可以直接通过 127.0.0.1 连到上面绑在 loopback 的 Hub。
+  beszel-agent:
+    image: henrygd/beszel-agent:${BESZEL_VERSION:-0.21.1}
+    container_name: beszel-agent
+    restart: unless-stopped
+    network_mode: host
+    depends_on:
+      - beszel
+    environment:
+      HUB_URL: http://127.0.0.1:${BESZEL_PORT:-8090}
+      KEY: ${AGENT_KEY:-}
+      TOKEN: ${AGENT_TOKEN:-}
+      SYSTEM_NAME: ${AGENT_SYSTEM_NAME:-}
+      DISABLE_SSH: "true"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - "${BESZEL_AGENT_DATA_PATH:-./beszel_agent_data}:/var/lib/beszel-agent"
+      # 监控额外磁盘：把挂载点下的目录映射到 /extra-filesystems/<名字>
+      # - /mnt/data/.beszel:/extra-filesystems/data:ro
