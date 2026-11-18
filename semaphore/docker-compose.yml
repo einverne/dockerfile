@@ -1,0 +1,29 @@
+# Semaphore UI：Ansible / Terraform / OpenTofu / Bash 的 Web 面板，SQLite 单容器部署。
+# 敏感配置（管理员密码、Key Store 加密密钥）放在 .env，参考 .env.example。详见 README.md。
+services:
+  semaphore:
+    image: semaphoreui/semaphore:${SEMAPHORE_VERSION:-v2.20.24}
+    container_name: semaphore
+    restart: unless-stopped
+    # 宿主机 3000 已被 vertex 占用，默认映射到 3010。
+    # 只在局域网 / Tailscale 内访问，不要直接暴露到公网（它握着所有机器的 SSH 私钥）
+    ports:
+      - "${BIND_HOST:-0.0.0.0}:${SEMAPHORE_PORT:-3010}:3000"
+    environment:
+      SEMAPHORE_DB_DIALECT: sqlite
+      SEMAPHORE_DB: /etc/semaphore/semaphore.sqlite
+      SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
+      # 仅在首次启动时创建管理员
+      SEMAPHORE_ADMIN: ${SEMAPHORE_ADMIN:-admin}
+      SEMAPHORE_ADMIN_NAME: ${SEMAPHORE_ADMIN_NAME:-admin}
+      SEMAPHORE_ADMIN_EMAIL: ${SEMAPHORE_ADMIN_EMAIL:-admin@localhost}
+      SEMAPHORE_ADMIN_PASSWORD: ${SEMAPHORE_ADMIN_PASSWORD:?set SEMAPHORE_ADMIN_PASSWORD in .env}
+      # Key Store 加密密钥：head -c32 /dev/urandom | base64
+      # 丢失后数据库里的私钥和密码全部无法解密，务必备份
+      SEMAPHORE_ACCESS_KEY_ENCRYPTION: ${SEMAPHORE_ACCESS_KEY_ENCRYPTION:?set SEMAPHORE_ACCESS_KEY_ENCRYPTION in .env}
+      TZ: ${TZ:-Asia/Tokyo}
+    volumes:
+      # 容器内以 uid 1001 运行，目录需要同 UID 所有
+      - ./config:/etc/semaphore
+      - ./data:/var/lib/semaphore
+      - ./tmp:/tmp/semaphore
