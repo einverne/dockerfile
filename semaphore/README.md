@@ -26,10 +26,10 @@ docker compose up -d
 
 ## 备份
 
-整个状态就是 `config/semaphore.sqlite` 加 `.env` 里的加密密钥：
+整个状态是 `data/database.sqlite`、`config/config.json`（cookie 密钥）和 `.env` 里的 Key Store 加密密钥。注意 v2.20.24 下 `SEMAPHORE_DB` 环境变量对 SQLite 不生效，数据库固定在容器内 `/var/lib/semaphore/database.sqlite`：
 
 ```bash
-docker compose stop && tar czf semaphore-$(date +%F).tgz config .env && docker compose start
+docker compose stop && tar czf semaphore-$(date +%F).tgz config data .env && docker compose start
 ```
 
 ## 升级

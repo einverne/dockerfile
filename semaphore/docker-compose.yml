@@ -11,7 +11,6 @@ services:
       - "${BIND_HOST:-0.0.0.0}:${SEMAPHORE_PORT:-3010}:3000"
     environment:
       SEMAPHORE_DB_DIALECT: sqlite
-      SEMAPHORE_DB: /etc/semaphore/semaphore.sqlite
       SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
       # 仅在首次启动时创建管理员
       SEMAPHORE_ADMIN: ${SEMAPHORE_ADMIN:-admin}
@@ -24,6 +23,8 @@ services:
       TZ: ${TZ:-Asia/Tokyo}
     volumes:
       # 容器内以 uid 1001 运行，目录需要同 UID 所有
+      # config.json（含 cookie 密钥）
       - ./config:/etc/semaphore
+      # SQLite 数据库固定在 /var/lib/semaphore/database.sqlite（SEMAPHORE_DB 对 sqlite 无效）
       - ./data:/var/lib/semaphore
       - ./tmp:/tmp/semaphore
