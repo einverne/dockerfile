@@ -1,16 +1,15 @@
-version: '3'
 services:
   wallabag:
     container_name: wallabag
     image: wallabag/wallabag:2.6.14
     restart: always
     ports:
-      - 3124:80
+      - 127.0.0.1:3124:80
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
-      - SYMFONY__ENV__DATABASE_HOST=${MYSQL_HOST}
+      - SYMFONY__ENV__DATABASE_HOST=${MYSQL_HOST:-db}
       - SYMFONY__ENV__DATABASE_PORT=3306
       - SYMFONY__ENV__DATABASE_NAME=${MYSQL_DATABASE_NAME}
       - SYMFONY__ENV__DATABASE_USER=${MYSQL_DATABASE_USER}
@@ -30,11 +29,33 @@ services:
       interval: 1m
       timeout: 3s
     depends_on:
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  db:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MARIADB_DATABASE=${MYSQL_DATABASE_NAME}
+      - MARIADB_USER=${MYSQL_DATABASE_USER}
+      - MARIADB_PASSWORD=${MYSQL_PASSWORD}
+      - TZ=Asia/Shanghai
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    volumes:
+      - ~/wallabag/mariadb:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
   redis:
     image: redis:alpine
+    restart: always
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 20s
       timeout: 3s
-
