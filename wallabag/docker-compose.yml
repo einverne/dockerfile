@@ -1,13 +1,14 @@
 services:
   wallabag:
     container_name: wallabag
-    image: wallabag/wallabag:2.6.14
+    image: wallabag/wallabag:2.6.19
     restart: always
     ports:
       - 127.0.0.1:3124:80
     environment:
       - TZ=Asia/Shanghai
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      # DB and user already exist; skip root provisioning (2.6.19 client requires SSL)
+      - POPULATE_DATABASE=False
       - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
       - SYMFONY__ENV__DATABASE_HOST=${MYSQL_HOST:-db}
       - SYMFONY__ENV__DATABASE_PORT=3306
